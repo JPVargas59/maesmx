@@ -1,0 +1,12 @@
+<!-- Subject search -->
+<p class="text-lg md:text-2xl py-4">Busca una materia o ve la disponibilidad que tenemos por dia</p>
+<div class="py-4">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+    <div class="grid grid-cols-2 md:grid-cols-3">
+      <formly-form class="pr-6" [form]="form" [fields]="subjects" [model]="model"></formly-form>
+      <formly-form class="pr-6" [form]="form" [fields]="days" [model]="model"></formly-form>
+      <div class="col-span-1"></div>
+      <app-submit-button class="col-start-2" label="Buscar"></app-submit-button>
+    </div>
+  </form>
+</div>

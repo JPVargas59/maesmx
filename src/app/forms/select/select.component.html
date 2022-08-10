@@ -1,0 +1,7 @@
+<div class="col-span-6 sm:col-span-3 py-2">
+  <label [for]="field.id" class="block text-sm font-medium text-gray-700">{{to.label}}</label>
+  <select [name]="field.name" [formControl]="formControl" [formlyAttributes]="field"
+          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    <option *ngFor="let item of (to.options | formlySelectOptions) | async" [value]="item.value">{{item.label}}</option>
+  </select>
+</div>

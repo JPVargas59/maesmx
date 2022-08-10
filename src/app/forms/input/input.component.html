@@ -1,0 +1,7 @@
+<div class="col-span-6 sm:col-span-3 py-2">
+  <label [for]="field.id" class="block text-sm font-medium text-gray-700">{{to.label}}</label>
+  <input type="text" [name]="field.name"  [formControl]="formControl" [formlyAttributes]="field"
+         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+         [class.disabled]="to.disabled" [class.readonly]="to.readonly" [class.bg-gray-200]="to.disabled || to.readonly"
+  >
+</div>

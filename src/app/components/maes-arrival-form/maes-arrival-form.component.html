@@ -1,0 +1,10 @@
+<app-modal [open]="peerInfo?.location == undefined || peerInfo?.activeSession == undefined" [canClose]="false"
+           title="Listo para recibir alumnos?"
+           body="Por favor indica donde te encuentras y presiona el boton para continuar">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <formly-form class="pr-6" [form]="form" [fields]="fields" [model]="model"></formly-form>
+      <app-submit-button label="Iniciar"></app-submit-button>
+    </div>
+  </form>
+</app-modal>

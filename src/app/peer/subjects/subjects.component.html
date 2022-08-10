@@ -1,0 +1,30 @@
+<div class="flex flex-col pb-5">
+  <div class="flex flex-col md:flex-row justify-between">
+    <h1 class="text-3xl font-bold py-2">Agrega materias</h1>
+    <!-- save button -->
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+      (click)="save()"
+    >
+      Guardar
+    </button>
+  </div>
+  <p class="text-sm text-gray-600">Recuerda que este horario deberá mantenerse hasta la semana 5</p>
+  <p>Las materias que selecciones se marcaran en verde.</p>
+  <p>Recuerda guardar tus cambios.</p>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="filter()">
+  <formly-form [form]="form" [fields]="fields" [model]="model" (modelChange)="filter()"></formly-form>
+</form>
+
+<div (click)="!hasSubject(subject) ? addSubject(subject) : removeSubject(subject)"
+     *ngFor="let subject of filteredSubjects"
+     class="py-4 px-4 bg-white h-full rounded my-2 hover:cursor-pointer"
+     [class.bg-green-500]="hasSubject(subject)"
+     [class.text-white]="hasSubject(subject)">
+  <p class="my-auto">{{ subject.name }}</p>
+</div>
+
+
+

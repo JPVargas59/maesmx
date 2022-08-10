@@ -1,0 +1,13 @@
+<h1 class="text-5xl font-extrabold text-gray-700">Bienvenid@</h1>
+<app-user-info [userInfo]="user"></app-user-info>
+
+<div class="py-2">
+  <hr>
+</div>
+<app-help-request-form [userInfo]="user"></app-help-request-form>
+
+<app-active-peers></app-active-peers>
+
+<app-announcements></app-announcements>
+
+<app-help-request-modal [requestId]="user.activeRequest"></app-help-request-modal>

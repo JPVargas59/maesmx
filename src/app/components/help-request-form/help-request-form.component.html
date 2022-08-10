@@ -1,0 +1,10 @@
+<p class="text-lg md:text-2xl pt-4">En que materia estas buscando ayuda?</p>
+<p>Le avisaremos a todos los MAE disponibles y te diremos quien puede ayudarte</p>
+<div class="py-2">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+    <div>
+      <formly-form class="pr-6" [form]="form" [fields]="fields" [model]="model"></formly-form>
+      <app-submit-button label="Buscar"></app-submit-button>
+    </div>
+  </form>
+</div>

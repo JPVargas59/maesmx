@@ -1,0 +1,26 @@
+<div class="grid grid-cols-1 xl:grid-cols-3 w-full h-screen bg-gray-50">
+  <div class="col-span-3"></div>
+  <div class="xl:col-start-2 px-4 xl:px-0">
+    <div class="xl:shadow-2xl shadow-lg rounded-xl px-6 py-4 bg-white">
+      <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate pt-3">Inicia sesión</h1>
+      <p class="pb-3">Ingresa tu correo y recibirás tu acceso en un mail.</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit(model)" *ngIf="!emailSent">
+        <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+        <app-submit-button label="Entrar"></app-submit-button>
+      </form>
+      <div *ngIf="emailSent && model.email">
+        <p class="text-sm text-gray-500">Se ha enviado un correo a <b>{{model.email}}</b></p>
+        <p class="text-sm text-gray-500">Por favor, revisa tu bandeja de entrada y haz click en el enlace para continuar.</p>
+        <button class="rounded-xl bg-teal-900 py-2 px-4 w-full text-white my-2" (click)="model = {}; emailSent = false">Cambiar correo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-3"></div>
+
+
+</div>
+
+
+

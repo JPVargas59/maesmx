@@ -1,0 +1,41 @@
+<div class="py-4">
+  <h3 class="text-xl font-bold">Busca algún MAE</h3>
+  <p class="text-md text-gray-600">Puedes buscar por nombre, matricula, materia o dias.</p>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <formly-form [form]="form" [fields]="fields" [model]="model"
+                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2"></formly-form>
+    <a class="cursor-pointer text-sm text-gray-600" (click)="resetForm()">Limpiar formulario</a>
+    <app-submit-button label="Buscar"></app-submit-button>
+  </form>
+</div>
+
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+  <div class="bg-white rounded shadow p-4" *ngFor="let peer of result">
+
+    <div class="flex justify-center ">
+      <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profilePic" class="rounded-full h-14 w-14 my-auto">
+      <div class="flex flex-col px-2">
+        <h1 class="my-auto font-medium">{{peer.name ?? 'MAE sin nombre'}}</h1>
+        <h1 class="my-auto text-start text-sm text-gray-600">{{peer.career ?? 'MAE sin carrera'}}</h1>
+
+        <a *ngIf="utilsService.isUrl(peer.activeSession!.location!)" [href]="peer.activeSession!.location"
+           target="_blank"
+           class="my-auto text-start text-xs text-blue-600 underline decoration-blue-500">en este link</a>
+        <h1 *ngIf="!utilsService.isUrl(peer.activeSession!.location!)" class="my-auto text-start text-xs text-gray-600">
+          en {{peer.activeSession!.location}}</h1>
+
+        <h1 class="my-auto text-start text-xs text-gray-600">
+          Desde {{peer.activeSession!.startTime!.toDate() | date: 'hh:mm'}}</h1>
+      </div>
+    </div>
+    <div class="flex flex-row py-2 hidden">
+      <a class="mx-auto border-2 border-indigo-800 rounded-md px-2 py-1 text-indigo-800 cursor-pointer">Horario</a>
+      <a class="mx-auto border-2 border-indigo-800 rounded-md px-2 py-1 text-indigo-800 cursor-pointer">Materias</a>
+      <a class="mx-auto border-2 border-indigo-800 rounded-md px-2 py-1 text-indigo-800 cursor-pointer">Reportar</a>
+    </div>
+
+  </div>
+</div>
+
+
+

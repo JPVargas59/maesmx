@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {FormGroup} from "@angular/forms";
+import {FormlyFieldConfig} from "@ngx-formly/core";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'peer-learning';
+
+  onSubmit(model: any) {
+    console.log(model);
+  }
 }

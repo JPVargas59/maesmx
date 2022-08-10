@@ -1,0 +1,35 @@
+<fieldset>
+  <legend class="sr-only">{{to.label}}</legend>
+  <div class="text-base font-medium text-gray-900" aria-hidden="true">{{to.label}}</div>
+  <div class="my-4 space-y-4">
+    <ng-container *ngIf="to.options; then singleCheckbox else singleCheckbox"></ng-container>
+  </div>
+
+  <ng-template #singleCheckbox>
+    <div class="flex items-start">
+      <div class="flex items-center h-5">
+        <input [formControl]="formControl" [formlyAttributes]="field" name="comments" type="checkbox"
+               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+      </div>
+      <div class="ml-3 text-sm">
+        <label class="font-medium text-gray-700">{{to.description}}</label>
+      </div>
+    </div>
+  </ng-template>
+
+  <!--<ng-template #multipleCheckbox>
+    <div class="mt-4 space-y-4">
+      <div class="flex items-start" *ngFor="let option of (to.options | formlySelectOptions) | async">
+        <div class="flex items-center h-5">
+          <input [name]="option.value" type="checkbox" [formControl]="formControl" [formlyAttributes]="field"
+                 class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+        </div>
+        <div class="ml-3 text-sm">
+          <label [for]="option.value" class="font-medium text-gray-700">{{option.label}}</label>
+          <p class="text-gray-500" *ngIf="option.description">{{option.description}}</p>
+        </div>
+      </div>
+    </div>
+  </ng-template>-->
+
+</fieldset>

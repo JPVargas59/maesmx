@@ -1,0 +1,20 @@
+<div class="w-full sticky top-0 backdrop-blur-md">
+  <div class="max-w-6xl mx-auto flex px-4 md:px-0">
+    <a routerLink="/student/home" class="hover:cursor-pointer hover:text-blue-800 transition-all py-2 px-4 pl-0 text-md text-gray-800 font-bold">
+      Inicio
+    </a>
+    <a routerLink="/student/schedules" class="hover:cursor-pointer hover:text-blue-800 transition-all py-2 px-4 text-md text-gray-800 font-bold">
+      Horarios
+    </a>
+    <div class="mx-auto"></div>
+    <a *ngIf="['admin', 'mae', 'coordi'].includes(user.role)" routerLink="/maes" class="hover:text-blue-800 transition-all py-2 px-4 text-md text-purple-800 font-bold">
+      MAE
+    </a><a *ngIf="['coordi', 'admin'].includes(user.role)" routerLink="/coordi" class="hover:text-blue-800 transition-all py-2 px-4 text-md text-purple-800 font-bold">
+      Coordi
+    </a>
+    <a (click)="userService.signOut()" routerLink="/" class="hover:text-blue-800 transition-all py-2 px-4 text-md text-red-800 font-bold">
+      Cerrar sesión
+    </a>
+
+  </div>
+</div>

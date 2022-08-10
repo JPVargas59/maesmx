@@ -1,0 +1,13 @@
+<div *ngIf="session!.location && peer!.name" class="my-4 bg-gray-100 rounded-mg p-4 w-fit">
+  <div *ngIf="!showConfirmation">
+    <p class="text-ellipsis">Los alumnos te buscaran en <b>{{peer!.location}}</b></p>
+    <p class="text-sm">Si te mueves de ubicación, cierra tu sesión e inicia una nueva para modificar tu ubicación</p>
+    <button class="bg-red-800 text-white px-4 py-2 my-2 rounded-md" (click)="endSessionConfirmation()">Terminar sesión</button>
+  </div>
+
+  <div *ngIf="showConfirmation">
+    <p>Tu llegada fue a las {{session!.startTime.toDate() | date:'hh:mm:ss'}}</p>
+    <p>Se registrarán: {{totalTime}} minutos</p>
+    <button class="bg-red-800 text-white px-4 py-2 my-2 rounded-md" (click)="endSession()">Terminar sesión</button>
+  </div>
+</div>

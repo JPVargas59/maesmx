@@ -1,0 +1,26 @@
+<!-- List of HelpRequests -->
+<h1 class="font-bold py-4 text-3xl">Solicitudes de alumnos</h1>
+<div class="text-center w-full bg-white rounded-md p-4"
+     *ngIf="(request$ | async)?.length == 0">
+  <h1 class="text-2xl my-1">
+    No hay solicitudes por el momento :O
+  </h1>
+  <p class="text-md text-gray-600 my-1">
+    Recuerda consultar frecuentemente para ver si hay alguna nueva solicitud :D
+  </p>
+  <p class="text-sm text-gray-600 my-1">
+    Por cierto, no es necesario actualizar la página. Aparecerán automáticamente cuando haya nuevas solicitudes.
+  </p>
+  <img class="h-40 w-40 mx-auto" src="https://i.gifer.com/5LSi.gif" alt="">
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+  <div
+    class="bg-white rounded-md p-4 shadow"
+    *ngFor="let request of request$ | async"
+  >
+    <h3 class="text-md">{{request.userInfo.career}}</h3>
+    <p>Busca ayuda para <b>{{request.subject.name}}</b></p>
+    <p *ngIf="request.comment">"{{request.comment}}"</p>
+    <button class="w-full rounded-md px-4 py-2 bg-green-600 text-white my-2" (click)="acceptRequest(request)">Aceptar</button>
+  </div>
+</div>

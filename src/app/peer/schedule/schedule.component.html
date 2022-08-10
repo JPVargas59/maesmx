@@ -1,0 +1,45 @@
+<div class="flex flex-col pb-5">
+  <div class="flex flex-col md:flex-row justify-between">
+    <h1 class="text-3xl font-bold py-2">Crea o modifica tu horario</h1>
+    <!-- save button -->
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+      (click)="save()"
+    >
+      Guardar
+    </button>
+  </div>
+  <p class="text-sm text-gray-600">Recuerda que este horario deberá mantenerse hasta la semana 5</p>
+</div>
+
+<h1 class="text-md font-bold">Elige los dias que darás asesorías</h1>
+<div class="grid grid-cols-5 gap-2 py-2">
+  <div
+    *ngFor="let day of weekdays"
+    class="bg-white py-4 font-bold text-center rounded-md hover:mouse-pointer"
+    (click)="hasWeekDay(day) ? removeWeekDay(day) : addWeekDay(day)"
+    [class.bg-green-500]="hasWeekDay(day)"
+    [class.text-white]="hasWeekDay(day)"
+  >
+    <p>{{translateWeekDay(day)}}</p>
+  </div>
+</div>
+
+
+<h1 class="text-md font-bold">Elige las horas que darás asesorías</h1>
+<div class="grid grid-cols-5 gap-2">
+  <div
+    *ngFor="let day of weekdays"
+  >
+    <div
+      *ngFor="let hour of hours"
+      class="bg-white py-4 font-bold text-center rounded-md hover:mouse-pointer my-2"
+      (click)="hasHourInWeekSchedule(day, hour) ? removeHour(day, hour) : addHour(day, hour)"
+      [class.bg-green-500]="hasHourInWeekSchedule(day, hour) "
+      [class.text-white]="hasHourInWeekSchedule(day, hour) "
+    >
+      <p>{{utilsService.hourToString(hour)}}</p>
+    </div>
+  </div>
+</div>
+

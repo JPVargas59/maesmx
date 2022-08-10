@@ -1,0 +1,5 @@
+<!-- Announcements -->
+<p class="text-lg md:text-2xl py-4">Avisos</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 px-2">
+  <img class="h-fit my-auto h-full" [src]="announcement.url" *ngFor="let announcement of announcement$ | async">
+</div>
