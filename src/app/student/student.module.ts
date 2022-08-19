@@ -10,6 +10,7 @@ import {FormlyModule} from "@ngx-formly/core";
 import {CustomFormsModule} from "../forms/custom-forms.module";
 import { SchedulesComponent } from './schedules/schedules.component';
 import { StudentNavComponent } from './student-nav/student-nav.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path: 'home', component: HomeComponent},
       {path: 'schedules', component: SchedulesComponent},
       {path: 'fill-profile', component: FillProfileComponent},
+      {path: 'profile/:userId', component: ProfileComponent},
       {path: '', redirectTo: 'home', pathMatch: 'full'}
     ]
   }
@@ -30,7 +32,8 @@ const routes: Routes = [
     HomeComponent,
     FillProfileComponent,
     SchedulesComponent,
-    StudentNavComponent
+    StudentNavComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -41,5 +44,5 @@ const routes: Routes = [
     CustomFormsModule
   ]
 })
-export class StudentModule {
-}
+// @ts-ignore
+export class StudentModule { }

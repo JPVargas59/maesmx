@@ -67,7 +67,7 @@ export class SearchPeerComponent implements OnInit {
     this.peerService.settings.subscribe(settings => {
       if (settings) this.settings = settings
       // get days from settings
-      this.fields[2].templateOptions!.options = this.settings.weekDays.map(day => {
+      this.fields[2].templateOptions!.options = this.settings?.weekDays?.map(day => {
         return {
           label: this.utilsService.weekDayToDay(day),
           value: day

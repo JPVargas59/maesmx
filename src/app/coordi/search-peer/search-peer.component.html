@@ -9,15 +9,17 @@
   </form>
 </div>
 
-<div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-  <div class="bg-white rounded shadow p-4" *ngFor="let peer of result">
-
-    <div class="flex justify-center ">
+<div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4">
+  <div class="bg-white rounded shadow p-2 my-2 h-fit break-inside-avoid-column cursor-pointer"  *ngFor="let peer of result">
+    <a class="flex justify-center h-fit" routerLink="/student/profile/{{peer.uid}}" target="_blank">
       <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profilePic" class="rounded-full h-14 w-14 my-auto">
       <div class="flex flex-col px-2">
-        <h1 class="my-auto font-medium">{{peer.name ?? 'MAE sin nombre'}}</h1>
-        <h1 class="my-auto text-start text-sm text-gray-600">{{peer.career ?? 'MAE sin carrera'}}</h1>
-
+        <h1 class="font-medium text-ellipsis">{{peer.name ?? 'MAE sin nombre'}}</h1>
+        <h1 class="text-start text-sm text-gray-600">{{peer.career ?? 'MAE sin carrera'}}</h1>
+        <div class="flex">
+          <div class="text-white text-center rounded-full px-2 py-1 my-1 text-xs font-semibold" [class.bg-green-500]="peer.weekSchedule" [class.bg-red-500]="!peer.weekSchedule">Horario</div>
+          <div class="bg-green-500 text-white text-center rounded-full px-2 py-1 my-1 text-xs font-semibold" [class.bg-green-500]="peer.subjects" [class.bg-red-500]="!peer.subjects">Materias</div>
+        </div>
         <div *ngIf="peer.activeSession">
           <a *ngIf="utilsService.isUrl(peer.activeSession?.location ?? '')" [href]="peer.activeSession!.location"
              target="_blank"
@@ -29,11 +31,9 @@
             Desde {{peer.activeSession?.startTime?.toDate() | date: 'hh:mm'}}</h1>
         </div>
       </div>
-    </div>
-    <div class="flex flex-row py-2 hidden">
-      <a class="mx-auto border-2 border-indigo-800 rounded-md px-2 py-1 text-indigo-800 cursor-pointer">Horario</a>
-      <a class="mx-auto border-2 border-indigo-800 rounded-md px-2 py-1 text-indigo-800 cursor-pointer">Materias</a>
-      <a class="mx-auto border-2 border-indigo-800 rounded-md px-2 py-1 text-indigo-800 cursor-pointer">Reportar</a>
+    </a>
+    <div class="flex flex-row py-2">
+      <a class="mx-auto border-2 border-indigo-800 rounded-md px-2 py-1 text-indigo-800 cursor-pointer hidden">Reportar</a>
     </div>
 
   </div>
