@@ -1,5 +1,6 @@
 <!-- Active Peers -->
-<p class="text-lg md:text-2xl py-4">Busca ayuda directamente con quienes están activos</p>
+<p class="text-lg md:text-2xl pt-4">Busca ayuda directamente con quienes están activos.</p>
+<p class="text-md pb-2"><b>Da click en el nombre </b>de algún MAE para ver su perfil.</p>
 
 <div class="text-center w-full bg-white rounded-md p-4"
      *ngIf="(activePeers$ | async)?.length == 0">
@@ -18,7 +19,7 @@
       <div class="flex justify-center ">
         <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profilePic" class="rounded-full h-14 w-14 my-auto">
         <div class="flex flex-col px-2">
-          <h1 class="my-auto font-medium">{{peer.name ?? 'MAE sin nombre'}}</h1>
+          <a class="text-xl font-bold hover:text-indigo-800 cursor-pointer transition-all" routerLink="/student/profile/{{peer.uid}}">{{peer.name}}</a>
           <h1 class="my-auto text-start text-sm text-gray-600">{{peer.career ?? 'MAE sin carrera'}}</h1>
 
           <a *ngIf="isUrl(peer.activeSession!.location!)" [href]="peer.activeSession!.location" target="_blank"
