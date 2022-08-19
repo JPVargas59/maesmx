@@ -15,6 +15,7 @@ import { ActiveRequestsComponent } from './active-requests/active-requests.compo
 import { MaesArrivalFormComponent } from './maes-arrival-form/maes-arrival-form.component';
 import { PeerActiveSessionComponent } from './peer-active-session/peer-active-session.component';
 import {RouterModule} from "@angular/router";
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -30,20 +31,22 @@ import {RouterModule} from "@angular/router";
         HelpRequestFormComponent,
         ActiveRequestsComponent,
         MaesArrivalFormComponent,
-        PeerActiveSessionComponent
+        PeerActiveSessionComponent,
+        FooterComponent
     ],
-  exports: [
-    FormLayoutComponent,
-    ModalComponent,
-    ActivePeersComponent,
-    AnnouncementsComponent,
-    HelpRequestModalComponent,
-    UserInfoComponent,
-    HelpRequestFormComponent,
-    ActiveRequestsComponent,
-    MaesArrivalFormComponent,
-    PeerActiveSessionComponent
-  ],
+    exports: [
+        FormLayoutComponent,
+        ModalComponent,
+        ActivePeersComponent,
+        AnnouncementsComponent,
+        HelpRequestModalComponent,
+        UserInfoComponent,
+        HelpRequestFormComponent,
+        ActiveRequestsComponent,
+        MaesArrivalFormComponent,
+        PeerActiveSessionComponent,
+        FooterComponent
+    ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

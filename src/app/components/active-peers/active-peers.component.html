@@ -12,9 +12,9 @@
   <button routerLink="/student/schedules" class="px-4 py-2 my-1 rounded-md bg-indigo-700 text-white text-md">Consultar los horarios</button>
 </div>
 
-<div class="columns-2 md:columns-3 lg:columns-4">
+<div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4">
   <div *ngFor="let peer of activePeers$ | async">
-    <div class="bg-white rounded shadow p-4 break-inside-avoid-column my-2" *ngIf="peer && !utils.datePastHours(peer.activeSession!.startTime!.toDate(), 24)">
+    <div class="bg-white rounded shadow p-4 break-inside-avoid-column my-2" *ngIf="peer && !utils.datePastHours(peer.activeSession!.startTime!.toDate(), 12)">
       <div class="flex justify-center ">
         <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profilePic" class="rounded-full h-14 w-14 my-auto">
         <div class="flex flex-col px-2">

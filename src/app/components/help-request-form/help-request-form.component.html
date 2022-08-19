@@ -4,7 +4,14 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
     <div>
       <formly-form class="pr-6" [form]="form" [fields]="fields" [model]="model"></formly-form>
-      <app-submit-button label="Buscar"></app-submit-button>
+      <div class="flex">
+        <div class="flex-grow">
+          <p class="text-sm text-gray-600">O si prefieres, consulta los horarios de los MAE.</p>
+          <button routerLink="/student/schedules" class="px-4 py-2 my-1 rounded-md text-indigo-700 border-indigo-700 border text-sm">Consultar los horarios</button>
+        </div>
+        <app-submit-button label="Buscar" class="self-end"></app-submit-button>
+      </div>
+
     </div>
   </form>
 </div>

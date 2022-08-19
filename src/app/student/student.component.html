@@ -1,10 +1,11 @@
 <app-student-nav *ngIf="userInfo as user"></app-student-nav>
-<main class="h-full bg-gray-50 px-4" *ngIf="userInfo as user; else loading">
+<main class="h-full min-h-screen bg-gray-50 px-4" *ngIf="userInfo as user; else loading">
   <div class="max-w-6xl mx-auto py-10">
     <router-outlet></router-outlet>
   </div>
-
 </main>
+<app-footer></app-footer>
+
 <ng-template #loading>
   <div class="h-screen flex flex-row items-center justify-center">
     <h1 class="font-bold text-2xl px-4">Cargando</h1>
@@ -16,7 +17,6 @@
       <span class="sr-only">Un momento por favor...</span>
     </div>
   </div>
-
 </ng-template>
 
 
