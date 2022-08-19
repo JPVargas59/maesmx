@@ -1,5 +1,6 @@
 <!-- Active Peers -->
 <p class="text-lg md:text-2xl py-4">Busca ayuda directamente con quienes están activos</p>
+
 <div class="text-center w-full bg-white rounded-md p-4"
      *ngIf="(activePeers$ | async)?.length == 0">
   <h1 class="text-2xl my-1">
@@ -10,21 +11,25 @@
   </p>
   <button routerLink="/student/schedules" class="px-4 py-2 my-1 rounded-md bg-indigo-700 text-white text-md">Consultar los horarios</button>
 </div>
-<div class="grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-4">
-  <div class="bg-white rounded shadow p-4" *ngFor="let peer of activePeers$ | async">
-    <div class="flex justify-center " *ngIf="peer">
-      <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profilePic" class="rounded-full h-14 w-14 my-auto">
-      <div class="flex flex-col px-2">
-        <h1 class="my-auto font-medium">{{peer.name ?? 'MAE sin nombre'}}</h1>
-        <h1 class="my-auto text-start text-sm text-gray-600">{{peer.career ?? 'MAE sin carrera'}}</h1>
 
-        <a *ngIf="isUrl(peer.activeSession!.location!)" [href]="peer.activeSession!.location" target="_blank"
-           class="my-auto text-start text-xs text-blue-600 underline decoration-blue-500">en este link</a>
-        <h1 *ngIf="!isUrl(peer.activeSession!.location!)" class="my-auto text-start text-xs text-gray-600">
-          en {{peer.activeSession!.location}}</h1>
+<div class="columns-2 md:columns-3 lg:columns-4">
+  <div *ngFor="let peer of activePeers$ | async">
+    <div class="bg-white rounded shadow p-4 break-inside-avoid-column my-2" *ngIf="peer && !utils.datePastHours(peer.activeSession!.startTime!.toDate(), 24)">
+      <div class="flex justify-center ">
+        <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profilePic" class="rounded-full h-14 w-14 my-auto">
+        <div class="flex flex-col px-2">
+          <h1 class="my-auto font-medium">{{peer.name ?? 'MAE sin nombre'}}</h1>
+          <h1 class="my-auto text-start text-sm text-gray-600">{{peer.career ?? 'MAE sin carrera'}}</h1>
 
-        <h1 class="my-auto text-start text-xs text-gray-600">
-          Desde {{peer.activeSession!.startTime!.toDate() | date: 'hh:mm'}}</h1>
+          <a *ngIf="isUrl(peer.activeSession!.location!)" [href]="peer.activeSession!.location" target="_blank"
+             class="my-auto text-start text-xs text-blue-600 underline decoration-blue-500">en este link</a>
+          <h1 *ngIf="!isUrl(peer.activeSession!.location!)" class="my-auto text-start text-xs text-gray-600">
+            en {{peer.activeSession!.location}}</h1>
+
+          <h1 class="my-auto text-start text-xs text-gray-600">
+            Desde las {{peer.activeSession!.startTime!.toDate() | date: 'HH:mm'}}</h1>
+          <p class="rounded-full bg-purple-600 text-white py-0.5 px-2 my-0.5 text-xs w-fit" *ngIf="peer.role == 'coordi'">coordi</p>
+        </div>
       </div>
     </div>
   </div>

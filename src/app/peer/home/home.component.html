@@ -1,13 +1,12 @@
-<div>
-  <h1 class="text-5xl font-extrabold text-gray-700">Bienvenid@ MAE</h1>
+<h1 class="text-5xl font-extrabold text-gray-700">Bienvenid@ MAE</h1>
 
-  <app-user-info [userInfo]="user"></app-user-info>
+<app-user-info [userInfo]="user"></app-user-info>
+<p *ngIf="user?.totalTime">Llevas <b>{{user!.totalTime!.toFixed(2)}}</b> horas registradas</p>
+<p *ngIf="user?.totalTime" class="text-sm text-gray-800">Si crees que hay un error, contacta a un <span class="text-purple-800">coordi</span>.</p>
 
-  <app-peer-active-session [peer]="user"></app-peer-active-session>
+<app-peer-active-session [peer]="user"></app-peer-active-session>
 
-  <app-active-requests [peerInfo]="user"></app-active-requests>
+<app-active-requests [peerInfo]="user"></app-active-requests>
 
-  <app-maes-arrival-form [peerInfo]="user"></app-maes-arrival-form>
-</div>
-
+<app-maes-arrival-form [peerInfo]="user"></app-maes-arrival-form>
 

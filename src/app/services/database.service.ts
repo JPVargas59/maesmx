@@ -61,7 +61,7 @@ export class DatabaseService {
   // get subjects from schools collection
   getSubjects(): Observable<Subject[]> {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];
-    return this.afs.collection(`schools/${emailDomain}/subjects`).valueChanges({idField: 'id'}) as Observable<Subject[]>;
+    return this.afs.collection(`schools/${emailDomain}/subjects`, ref => ref.orderBy('name', 'asc')).valueChanges({idField: 'id'}) as Observable<Subject[]>;
   }
 
   // add request to request collection with userInfo and subject and add request to user collection
@@ -75,7 +75,7 @@ export class DatabaseService {
           },
           createdAt: this.timestamp,
           updatedAt: this.timestamp,
-          comment: comment,
+          comment: comment ?? "",
           status: Status.PENDING
         }).then(request => {
           this.afs.doc(`users/${userInfo.uid}`).update({
@@ -188,13 +188,13 @@ export class DatabaseService {
 
   // get users with active session
   getUsersWithActiveSession(): Observable<PeerInfo[]> {
-    return this.afs.collection<PeerInfo>('users', ref => ref.where('activeSession', '!=', null)).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
+    return this.afs.collection<PeerInfo>('users', ref => ref.where('activeSession', '!=', null).orderBy('activeSession', 'asc')).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
   }
 
   // get announcements from schools collection where endDate is greater than current date
   getAnnouncements(): Observable<Announcement[]> {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];
-    return this.afs.collection(`schools/${emailDomain}/announcements`, ref => ref.where('endDate', '>', new Date())).valueChanges({idField: 'id'}) as Observable<Announcement[]>;
+    return this.afs.collection(`schools/${emailDomain}/announcements`, ref => ref.where('endDate', '>', new Date()).orderBy('endDate', 'asc')).valueChanges({idField: 'id'}) as Observable<Announcement[]>;
   }
 
   // get settings from schools collection
@@ -237,16 +237,20 @@ export class DatabaseService {
   }
 
   getUsersByName(name: string): Observable<PeerInfo[]> {
-    return this.afs.collection<PeerInfo>('users', ref => ref.where('name', '==', name)).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
+    return this.afs.collection<PeerInfo>('users', ref => ref.where('name', '==', name).orderBy('name', 'asc')).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
   }
 
   getUsersBySubject(subject: Subject): Observable<PeerInfo[]> {
     console.log(subject)
-    return this.afs.collection<PeerInfo>('users', ref => ref.where('subjects', 'array-contains', subject)).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
+    return this.afs.collection<PeerInfo>('users', ref => ref.where('subjects', 'array-contains', subject).orderBy('name', 'asc')).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
   }
 
   getUsersByWeekDays(day: WeekDays): Observable<PeerInfo[]> {
-    return this.afs.collection<PeerInfo>('users', ref => ref.where('weekSchedule.' + day, '!=', null)).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
+    return this.afs.collection<PeerInfo>('users', ref => ref.where('weekSchedule.' + day, '!=', null).orderBy('name', 'asc')).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
+  }
+
+  getUsers(): Observable<PeerInfo[]> {
+    return this.afs.collection<PeerInfo>('users', ref => ref.orderBy("name", "asc")).valueChanges({idField: 'uid'})
   }
 
 }

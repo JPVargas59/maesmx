@@ -1,0 +1,19 @@
+thead {
+  @apply bg-gray-100 p-2
+}
+
+table {
+  @apply w-full rounded-t-2xl
+}
+
+th {
+  @apply text-left p-2
+}
+
+td {
+  @apply break-normal
+}
+
+#users-count > p {
+  @apply cursor-pointer hover:text-indigo-500 hover:underline transition-all
+}

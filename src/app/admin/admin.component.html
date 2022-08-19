@@ -1,5 +1,5 @@
-<app-nav></app-nav>
-<main class="h-screen bg-gray-50 px-4" *ngIf="peerInfo$ | async as user; else loading">
+<app-admin-nav></app-admin-nav>
+<main class="h-full bg-gray-50 px-4" *ngIf="userInfo$ | async as user; else loading">
   <div class="max-w-6xl mx-auto py-5">
     <router-outlet></router-outlet>
   </div>

@@ -6,13 +6,27 @@ import {DatabaseService} from "./database.service";
 import firebase from 'firebase/compat/app';
 import auth = firebase.auth;
 import {Role, UserInfo} from "../models/UserInfo";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private fsa: AngularFireAuth, private router: Router, private storage: DatabaseService) { }
+  userData!: UserInfo;
+
+  constructor(private fsa: AngularFireAuth, private router: Router, private storage: DatabaseService) {
+    this.fsa.authState.subscribe(async (user) => {
+      if (user) {
+        this.userData = await firstValueFrom(this.storage.getUserInfo());
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user')!);
+      } else {
+        localStorage.setItem('user', 'null');
+        JSON.parse(localStorage.getItem('user')!);
+      }
+    });
+  }
 
   // Get current user
   getUser(): Promise<any> {
@@ -31,7 +45,6 @@ export class AuthService {
   isLoggedIn(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.fsa.authState.subscribe(user => {
-        console.log(user)
         if (user) {
           resolve(true);
         } else {

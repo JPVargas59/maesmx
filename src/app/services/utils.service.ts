@@ -68,4 +68,9 @@ export class UtilsService {
     return re.test(url);
   }
 
+  datePastHours(date: Date, hours: number) {
+    const today = new Date()
+    return today > new Date(date.setHours(date.getHours() + hours));
+  }
+
 }

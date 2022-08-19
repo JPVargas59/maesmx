@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {PeerInfo} from "../../models/UserInfo";
 import {DatabaseService} from "../../services/database.service";
+import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: 'app-active-peers',
@@ -12,11 +13,12 @@ export class ActivePeersComponent implements OnInit {
 
   activePeers$: Observable<PeerInfo[]>;
 
-  constructor(private databaseService: DatabaseService) {
+  constructor(private databaseService: DatabaseService, public utils: UtilsService) {
     this.activePeers$ = this.databaseService.getUsersWithActiveSession();
   }
 
   ngOnInit(): void {
+
   }
 
   isUrl(url: string): boolean {

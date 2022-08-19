@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {UserInfo} from "../../models/UserInfo";
+import {PeerInfo, UserInfo} from "../../models/UserInfo";
 import {DatabaseService} from "../../services/database.service";
 import {Router} from "@angular/router";
 
@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class UserInfoComponent implements OnChanges {
 
   @Input()
-  userInfo!: UserInfo | null;
+  userInfo!: PeerInfo | null;
 
   constructor(private database: DatabaseService, private router: Router) {
 

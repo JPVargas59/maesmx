@@ -23,6 +23,7 @@ export interface PeerInfo extends UserInfo {
   activeSession?: PeerSession;
   weekSchedule?: WeekSchedule;
   subjects?: Subject[];
+  totalTime?: number;
 }
 
 export type WeekSchedule = {

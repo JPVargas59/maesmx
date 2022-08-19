@@ -22,6 +22,8 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import { PERSISTENCE } from '@angular/fire/compat/auth';
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import { AngularFireAuthGuardModule} from "@angular/fire/compat/auth-guard";
+import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
+import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
 
 // @ts-ignore
 @NgModule({
@@ -48,7 +50,6 @@ import { AngularFireAuthGuardModule} from "@angular/fire/compat/auth-guard";
     ScreenTrackingService,
     UserTrackingService,
     AngularFireAuthGuardModule,
-    { provide: PERSISTENCE, useValue: 'session' },
   ],
   exports: [],
   bootstrap: [AppComponent]
