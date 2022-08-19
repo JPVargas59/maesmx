@@ -26,6 +26,7 @@ export class SubjectsComponent implements OnInit {
       }
     }
   ]
+
   subjects!: Subject[];
   peerInfo!: PeerInfo;
   filteredSubjects!: Subject[];

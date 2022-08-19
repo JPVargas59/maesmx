@@ -1,9 +1,10 @@
 <app-admin-nav></app-admin-nav>
-<main class="h-full bg-gray-50 px-4" *ngIf="userInfo$ | async as user; else loading">
+<main class="h-full min-h-[88.3vh] bg-gray-50 px-4" *ngIf="userInfo$ | async as user; else loading">
   <div class="max-w-6xl mx-auto py-5">
     <router-outlet></router-outlet>
   </div>
 </main>
+<app-footer></app-footer>
 
 
 <ng-template #loading>

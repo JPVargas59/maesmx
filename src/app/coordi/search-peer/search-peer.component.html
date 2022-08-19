@@ -18,14 +18,16 @@
         <h1 class="my-auto font-medium">{{peer.name ?? 'MAE sin nombre'}}</h1>
         <h1 class="my-auto text-start text-sm text-gray-600">{{peer.career ?? 'MAE sin carrera'}}</h1>
 
-        <a *ngIf="utilsService.isUrl(peer.activeSession!.location!)" [href]="peer.activeSession!.location"
-           target="_blank"
-           class="my-auto text-start text-xs text-blue-600 underline decoration-blue-500">en este link</a>
-        <h1 *ngIf="!utilsService.isUrl(peer.activeSession!.location!)" class="my-auto text-start text-xs text-gray-600">
-          en {{peer.activeSession!.location}}</h1>
+        <div *ngIf="peer.activeSession">
+          <a *ngIf="utilsService.isUrl(peer.activeSession?.location ?? '')" [href]="peer.activeSession!.location"
+             target="_blank"
+             class="my-auto text-start text-xs text-blue-600 underline decoration-blue-500">en este link</a>
+          <h1 *ngIf="!utilsService.isUrl(peer.activeSession?.location ?? '')" class="my-auto text-start text-xs text-gray-600">
+            en {{peer.activeSession?.location}}</h1>
 
-        <h1 class="my-auto text-start text-xs text-gray-600">
-          Desde {{peer.activeSession!.startTime!.toDate() | date: 'hh:mm'}}</h1>
+          <h1 class="my-auto text-start text-xs text-gray-600">
+            Desde {{peer.activeSession?.startTime?.toDate() | date: 'hh:mm'}}</h1>
+        </div>
       </div>
     </div>
     <div class="flex flex-row py-2 hidden">

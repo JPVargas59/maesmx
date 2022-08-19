@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PeerInfo, Role, UserInfo} from "../../models/UserInfo";
 import {DatabaseService} from "../../services/database.service";
-import {Observable} from "rxjs";
+import {firstValueFrom, Observable} from "rxjs";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-users',
@@ -9,6 +10,27 @@ import {Observable} from "rxjs";
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+
+  form: FormGroup = new FormGroup({})
+  model: {userName: string, userId: string} = {userName: '', userId: ''}
+  fields = [
+    {
+      key: 'userId',
+      type: 'input',
+      templateOptions: {
+        label: 'Matricula',
+        placeholder: 'Busca un usuario por matricula',
+      }
+    },
+    {
+      key: 'userName',
+      type: 'input',
+      templateOptions: {
+        label: 'Nombre',
+        placeholder: 'Busca un usuario por nombre',
+      }
+    }
+  ]
 
   user$!: Observable<PeerInfo[]>
   filteredUsers!: PeerInfo[]
@@ -19,6 +41,15 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetFilter()
+  }
+
+  async filter() {
+    if (!this.model.userName && !this.model.userId) this.resetFilter()
+    this.filteredUsers = (await firstValueFrom(this.user$)).filter(user => user.name!.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+      .includes(this.model.userName!.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+      )).filter(user => user.uid!.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+      .includes(this.model.userId!.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+      ))
   }
 
   resetFilter() {

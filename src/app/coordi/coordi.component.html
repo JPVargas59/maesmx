@@ -1,9 +1,11 @@
-<main class="h-full bg-gray-50 px-4" *ngIf="peerInfo$ | async as user; else loading">
+<main class="h-full min-h-screen bg-gray-50 px-4" *ngIf="peerInfo$ | async as user; else loading">
   <app-coordi-nav></app-coordi-nav>
   <div class="max-w-6xl mx-auto py-5">
     <router-outlet></router-outlet>
   </div>
 </main>
+
+<app-footer></app-footer>
 
 
 <ng-template #loading>

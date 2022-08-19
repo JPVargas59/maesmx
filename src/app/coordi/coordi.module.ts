@@ -8,6 +8,7 @@ import {FormlyModule} from "@ngx-formly/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CustomFormsModule} from "../forms/custom-forms.module";
 import { SearchPeerComponent } from './search-peer/search-peer.component';
+import {ComponentsModule} from "../components/components.module";
 
 const routes: Routes = [
   {
@@ -31,13 +32,14 @@ const routes: Routes = [
     CoordiNavComponent,
     SearchPeerComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    FormlyModule,
-    ReactiveFormsModule,
-    CustomFormsModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        FormlyModule,
+        ReactiveFormsModule,
+        CustomFormsModule,
+        ComponentsModule
+    ]
 })
 export class CoordiModule {
 }

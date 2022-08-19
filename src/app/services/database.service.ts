@@ -32,7 +32,7 @@ export class DatabaseService {
   }
 
   // Get current user
-  getUserInfo(): Observable<UserInfo> {
+  getUserInfo(): Observable<PeerInfo> {
     return this.afs.doc<UserInfo>('users/' + localStorage.getItem('uid')).valueChanges() as Observable<UserInfo>;
   }
 
@@ -237,7 +237,7 @@ export class DatabaseService {
   }
 
   getUsersByName(name: string): Observable<PeerInfo[]> {
-    return this.afs.collection<PeerInfo>('users', ref => ref.where('name', '==', name).orderBy('name', 'asc')).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
+    return this.afs.collection<PeerInfo>('users', ref => ref.where('name', '==', name)).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
   }
 
   getUsersBySubject(subject: Subject): Observable<PeerInfo[]> {
@@ -246,7 +246,7 @@ export class DatabaseService {
   }
 
   getUsersByWeekDays(day: WeekDays): Observable<PeerInfo[]> {
-    return this.afs.collection<PeerInfo>('users', ref => ref.where('weekSchedule.' + day, '!=', null).orderBy('name', 'asc')).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
+    return this.afs.collection<PeerInfo>('users', ref => ref.where('weekSchedule.' + day, '!=', null)).valueChanges({idField: 'id'}) as Observable<PeerInfo[]>;
   }
 
   getUsers(): Observable<PeerInfo[]> {

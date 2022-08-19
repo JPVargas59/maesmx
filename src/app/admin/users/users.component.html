@@ -1,5 +1,5 @@
 <div class="my-4">
-  <h2 class="text-xl text-gray-800 font-medium">Usuarios</h2>
+  <h2 class="text-3xl text-gray-800 font-bold">Usuarios</h2>
   <div *ngIf="user$ | async as users" class="grid grid-cols-4" id="users-count">
     <p (click)="resetFilter()">{{users.length}} usuarios</p>
     <p (click)="filteredUsers = filterMaes(users)">{{filterMaes(users).length}} maes registrados</p>
@@ -7,6 +7,11 @@
     <p (click)="filteredUsers = filterMaesMissingSubjects(users)">{{filterMaesMissingSubjects(users).length}} maes sin Materias</p>
   </div>
 </div>
+
+<form [formGroup]="form" (ngSubmit)="filter()">
+  <formly-form [form]="form" [fields]="fields" [model]="model" (modelChange)="filter()"></formly-form>
+</form>
+
 <table class="table-auto w-full">
   <thead>
     <tr>

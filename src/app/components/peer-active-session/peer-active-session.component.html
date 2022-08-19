@@ -1,4 +1,11 @@
-<div *ngIf="session!.location && peer!.name" class="my-4 bg-gray-100 rounded-mg p-4 w-fit">
+<div class="w-full bg-blue-600 text-gray-50 rounded-md shadow-sm shadow-blue-400 p-4 my-3" *ngIf="session?.startTime && utils.datePastHours(session!.startTime!.toDate(), 5)">
+  <p class="text-3xl font-bold">👀 Ups!</p>
+  <p class="font-medium">Tu sesión lleva abierta desde {{session!.startTime.toDate() | date:'dd MMMM HH:mm'}}</p>
+  <p class="font-medium">Si esto no es por error, recuerda pedirle a un coordi que te autorice las horas del dia de hoy.</p>
+  <p class="text-sm">Cualquier sesión de más de 5 horas, requiere aprobación de un coordi.</p>
+</div>
+
+<div *ngIf="session?.location && peer!.name" class="my-4 bg-gray-100 rounded-mg p-4 w-fit">
   <div *ngIf="!showConfirmation">
     <p class="text-ellipsis">Los alumnos te buscaran en <b>{{peer!.location}}</b></p>
     <p class="text-sm">Si te mueves de ubicación, cierra tu sesión e inicia una nueva para modificar tu ubicación</p>
@@ -6,7 +13,7 @@
   </div>
 
   <div *ngIf="showConfirmation">
-    <p>Tu llegada fue a las {{session!.startTime.toDate() | date:'hh:mm:ss'}}</p>
+    <p>Tu llegada fue a las {{session!.startTime.toDate() | date:'HH:mm:ss'}}</p>
     <p>Se registrarán: {{totalTime}} minutos</p>
     <button class="bg-red-800 text-white px-4 py-2 my-2 rounded-md" (click)="endSession()">Terminar sesión</button>
   </div>

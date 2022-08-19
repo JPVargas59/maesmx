@@ -44,8 +44,9 @@ export class PeerService {
     this.databaseService.getUserInfo().subscribe(info => {
       if (info['activeSession']?.id) localStorage.setItem('activeSession', info['activeSession']?.id)
       this.peer.next(info)
+      if (info.activeSession) this.session.next(info.activeSession)
     });
-    this.databaseService.getCurrentUserActiveSession().subscribe(session => this.session.next(session));
+    // this.databaseService.getCurrentUserActiveSession().subscribe(session => this.session.next(session));
     this.databaseService.getSettings().subscribe(settings => this.settings.next(settings));
     console.log(this.session.value?.id)
   }

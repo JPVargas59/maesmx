@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {PeerInfo} from "../../models/UserInfo";
 import {PeerSession} from "../../models/PeerSession";
 import {DatabaseService} from "../../services/database.service";
+import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: 'app-peer-active-session',
@@ -18,18 +19,22 @@ export class PeerActiveSessionComponent implements OnChanges {
   totalTime: number = 0;
 
   constructor(
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    public utils: UtilsService
   ) {
 
   }
 
   ngOnChanges(): void {
+    this.session = this.peer?.activeSession!
+    /*
     this.databaseService.getCurrentUserActiveSession().subscribe(session => {
       console.log(session);
       if (session) {
         this.session = session;
       }
     })
+    */
   }
 
   async endSessionConfirmation() {

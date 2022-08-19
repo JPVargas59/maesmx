@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import {ComponentsModule} from "../components/components.module";
 import { UsersComponent } from './users/users.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {FormlyModule} from "@ngx-formly/core";
 
 const routes: Routes = [
   {path: '', component: AdminComponent, children: [
@@ -25,7 +27,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule,
+    FormlyModule
   ]
 })
 export class AdminModule { }
