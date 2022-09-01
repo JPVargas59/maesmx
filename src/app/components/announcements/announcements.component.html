@@ -1,5 +1,5 @@
 <!-- Announcements -->
 <p class="text-lg md:text-2xl py-4">Avisos</p>
 <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4">
-  <img class="h-fit my-auto h-full py-4" [src]="announcement.url" *ngFor="let announcement of announcement$ | async">
+  <img class="w-96 mx-auto py-4" [src]="announcement.url" *ngFor="let announcement of announcement$ | async">
 </div>
