@@ -253,4 +253,8 @@ export class DatabaseService {
     return this.afs.collection<PeerInfo>('users', ref => ref.orderBy("name", "asc")).valueChanges({idField: 'uid'})
   }
 
+  addResolvedRequest(request: HelpRequest) {
+    return this.afs.collection("requests").add(request);
+  } 
+
 }

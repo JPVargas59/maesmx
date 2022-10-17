@@ -33,8 +33,12 @@ export class ProfileComponent implements OnInit {
     }
   ]
 
+  registerRequestForm: boolean = false;
+
   weekdays!: WeekDays[];
   hours: number[] = [];
+  maeUid: string = '';
+  currentUser!: PeerInfo;
 
   showSchedule = true;
   showSubjects = true;
@@ -45,6 +49,13 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     public utils: UtilsService
   ) {
+
+    this.databaseService.getUserInfo()
+      .subscribe(_user => {
+        this.currentUser = _user;
+      })
+
+    this.maeUid = this.route.snapshot.params['userId'];
     this.user$ = this.databaseService.getUser(this.route.snapshot.params['userId'])
     this.user$.subscribe(user => this.userInfo = user)
     this.databaseService.getSettings().subscribe(settings => {
