@@ -62,6 +62,7 @@ export class HelpRequestModalComponent implements OnChanges {
     await this.databaseService.updateUserInfo(this.model?.userInfo.uid, {activeRequest: this.databaseService.deleteField});
   }
 
+  // TODO: Agregar opción para agregar comentario de retroalimentación a BD
   async onResolve() {
     this.model!.resolvedAt = this.databaseService.timestamp
     this.model!.status = Status.RESOLVED
@@ -70,15 +71,7 @@ export class HelpRequestModalComponent implements OnChanges {
     alert(`Registramos asesoria dde ${this.model?.userInfo.name} con ${this.model?.peerInfo?.name} para la materia ${this.model?.subject.name} el dia ${this.model?.updatedAt?.toDate()}`)
 
   }
-
-  async onMiss() {
-    alert('No se ha recibido asesoria')
-    this.model!.resolvedAt = this.databaseService.timestamp
-    this.model!.status = Status.MISSED
-    await this.databaseService.updateHelpRequest(this.requestId!, this.model!);
-    await this.databaseService.updateUserInfo(this.model?.userInfo.uid, {activeRequest: this.databaseService.deleteField});
-  }
-
+  
   isUrl(value: string) {
 
   }

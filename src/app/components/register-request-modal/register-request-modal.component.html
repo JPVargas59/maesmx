@@ -1,0 +1,16 @@
+<app-modal
+  title="Registrar aseoría con {{mae.name}}"
+  body=""
+  [canClose]="true"
+  closeBtnText="Cancelar solicitud"
+  [open]="open"
+  >
+  <form [formGroup]="form" (ngSubmit)="onSubmit(model!)" class="py-2">
+    <formly-form class="pr-6" [form]="form" [fields]="fields" [model]="model"></formly-form>
+    <app-submit-button label="Registrar asesoría"></app-submit-button>
+  </form>
+
+</app-modal>
+
+
+

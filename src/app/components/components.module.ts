@@ -16,6 +16,7 @@ import { MaesArrivalFormComponent } from './maes-arrival-form/maes-arrival-form.
 import { PeerActiveSessionComponent } from './peer-active-session/peer-active-session.component';
 import {RouterModule} from "@angular/router";
 import { FooterComponent } from './footer/footer.component';
+import { RegisterRequestModalComponent } from './register-request-modal/register-request-modal.component';
 
 
 
@@ -32,7 +33,8 @@ import { FooterComponent } from './footer/footer.component';
         ActiveRequestsComponent,
         MaesArrivalFormComponent,
         PeerActiveSessionComponent,
-        FooterComponent
+        FooterComponent,
+        RegisterRequestModalComponent
     ],
     exports: [
         FormLayoutComponent,
@@ -45,7 +47,8 @@ import { FooterComponent } from './footer/footer.component';
         ActiveRequestsComponent,
         MaesArrivalFormComponent,
         PeerActiveSessionComponent,
-        FooterComponent
+        FooterComponent,
+        RegisterRequestModalComponent
     ],
   imports: [
     CommonModule,
