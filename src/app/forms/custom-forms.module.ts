@@ -9,6 +9,7 @@ import {SubmitButtonComponent} from "./submit-button/submit-button.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormlyModule} from "@ngx-formly/core";
 import {FormlySelectModule} from "@ngx-formly/core/select";
+import { FileComponent } from './file/file.component';
 
 
 
@@ -20,6 +21,7 @@ import {FormlySelectModule} from "@ngx-formly/core/select";
     RadioComponent,
     CheckboxComponent,
     SubmitButtonComponent,
+    FileComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import {FormlySelectModule} from "@ngx-formly/core/select";
         {name: 'select', component: SelectComponent},
         {name: 'checkbox', component: CheckboxComponent},
         {name: 'radio', component: RadioComponent},
+        {name: 'file', component: FileComponent},
       ],
     }),
     FormlySelectModule,

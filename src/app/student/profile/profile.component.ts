@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     public utils: UtilsService
   ) {
+    console.log(this.route.snapshot.params['userId'])
     this.user$ = this.databaseService.getUser(this.route.snapshot.params['userId'])
     this.user$.subscribe(user => this.userInfo = user)
     this.databaseService.getSettings().subscribe(settings => {

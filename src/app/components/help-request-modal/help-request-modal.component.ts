@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {DatabaseService} from "../../services/database.service";
 import {FormGroup} from "@angular/forms";
 import {HelpRequest, Status} from "../../models/HelpRequest";

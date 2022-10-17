@@ -9,6 +9,7 @@ import {PeerSession, PeerSessionStatus} from "../models/PeerSession";
 import {Announcement} from "../models/Announcement";
 import {Settings, WeekDays} from "../models/Settings";
 import {PeerSchedule} from "../models/PeerSchedule";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 
 @Injectable({
@@ -28,7 +29,7 @@ export class DatabaseService {
     return firestore.increment(n);
   }
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private storage: AngularFireStorage) {
   }
 
   // Get current user
@@ -45,6 +46,21 @@ export class DatabaseService {
       }).catch(error => {
         reject(error);
       });
+    });
+  }
+
+  // upload file to storage
+  uploadFile(file: File, path: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const ref = this.storage.ref(path);
+      const task = ref.put(file);
+      task.then(() => {
+        ref.getDownloadURL().subscribe(url => {
+          resolve(url);
+        })
+      }).catch(error => {
+        reject(error);
+      })
     });
   }
 
