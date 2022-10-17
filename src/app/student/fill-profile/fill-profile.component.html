@@ -1,11 +1,11 @@
-<div class="h-screen bg-gray-50 py-32">
+<div class="h-screen bg-gray-50">
   <!-- Vertically centered card -->
     <div class="grid grid-cols-6">
       <h1
         class="col-start-2 col-span-4 text-4xl px-5 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate pt-3">
-        Un último paso</h1>
+        Mi perfil</h1>
     </div>
-    <app-form-layout title="Información personal" description="Completa tu perfil para poder continuar">
+    <app-form-layout title="Información personal" description="Edita tu información personal aquí">
       <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
         <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
         <app-submit-button></app-submit-button>

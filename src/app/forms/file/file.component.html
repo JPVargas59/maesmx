@@ -1,0 +1,19 @@
+<div class="col-span-6 sm:col-span-3 py-2">
+    <label class="block text-sm font-medium text-gray-700" [for]="field.id">{{to.label}}</label>
+    <div class="mt-1 flex items-center">
+                <span class="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
+                  <img id="imageUrl" [src]="field.templateOptions['photoURL'] ?? 'https://randomuser.me/api/portraits/lego/5.jpg'" alt="">
+                </span>
+      <input hidden type="file"
+             id="fileInput"
+             [name]="field.name"  [formControl]="formControl" [formlyAttributes]="field"
+             accept="image/*"
+      />
+      <button
+        (click)="chooseFile()"
+        type="button" class="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        [class.disabled]="to.disabled" [class.readonly]="to.readonly" [class.bg-gray-200]="to.disabled || to.readonly">
+      {{to.label}}
+      </button>
+    </div>
+</div>

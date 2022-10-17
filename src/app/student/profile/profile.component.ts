@@ -56,6 +56,7 @@ export class ProfileComponent implements OnInit {
       })
 
     this.maeUid = this.route.snapshot.params['userId'];
+
     this.user$ = this.databaseService.getUser(this.route.snapshot.params['userId'])
     this.user$.subscribe(user => this.userInfo = user)
     this.databaseService.getSettings().subscribe(settings => {

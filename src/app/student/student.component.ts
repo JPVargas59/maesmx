@@ -23,7 +23,7 @@ export class StudentComponent implements OnInit {
       console.log(!user, !(user?.name ?? false))
       this.userInfo = user!
       // @ts-ignore
-      if (!user && !(user?.name ?? false)) {
+      if (!user && !(user?.name ?? false) || !(user?.photoURL ?? false)) {
         // this.router.navigate(['/student/fill-profile']);
       }
     });

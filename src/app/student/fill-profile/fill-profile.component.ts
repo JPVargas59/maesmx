@@ -3,7 +3,7 @@ import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
 import {DatabaseService} from "../../services/database.service";
 import {Router} from "@angular/router";
-import {Role} from "../../models/UserInfo";
+import {PeerInfo, Role, UserInfo} from "../../models/UserInfo";
 
 @Component({
   selector: 'app-fill-profile',
@@ -13,10 +13,21 @@ import {Role} from "../../models/UserInfo";
 export class FillProfileComponent implements OnInit {
 
   form = new FormGroup({});
-  model = {
-    email: localStorage.getItem('email'),
+  model: UserInfo = {
+    role: Role.User,
+    uid: "",
+    email: localStorage.getItem('email')!,
+    photo: ''
   };
   fields: FormlyFieldConfig[] = [
+    {
+      key: 'photo',
+      type: 'file',
+      templateOptions: {
+        label: 'Sube tu imagen de perfil',
+        placeholder: 'Subir foto'
+      }
+    },
     {
       key: 'email',
       type: 'input',
@@ -82,13 +93,13 @@ export class FillProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.database.getUserInfo().subscribe(userInfo => {
+      console.log(userInfo);
       this.model = userInfo;
     })
   }
 
   onSubmit(value: any) {
     delete value.email;
-    console.log(value);
     // update userInfo
     this.database.updateUserInfo(localStorage.getItem('uid'), value).then(() => {
       console.log('User info updated');
