@@ -20,7 +20,7 @@ export class StudentComponent implements OnInit {
     private router: Router
   ) {
     this.userService.user$.subscribe(user => {
-      console.log(!user, !(user?.name ?? false))
+      // console.log(!user, !(user?.name ?? false))
       this.userInfo = user!
       // @ts-ignore
       if (!user && !(user?.name ?? false) || !(user?.photoURL ?? false)) {

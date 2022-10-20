@@ -25,14 +25,14 @@ import { AngularFireAuthGuardModule} from "@angular/fire/compat/auth-guard";
 import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
-import { ModalTestComponent } from './modal-test/modal-test.component';
+// import { ModalTestComponent } from './modal-test/modal-test.component';
 
 // @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    ModalTestComponent,
+    // ModalTestComponent,
   ],
   imports: [
     BrowserModule,

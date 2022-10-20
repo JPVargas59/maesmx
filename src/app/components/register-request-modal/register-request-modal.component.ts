@@ -61,7 +61,7 @@ export class RegisterRequestModalComponent implements OnInit {
       comment: undefined,
       peerInfo: this.mae,
       resolvedAt: time,
-      status: Status.ACCEPTED,
+      status: Status.RESOLVED,
     }
   }
 
@@ -77,8 +77,6 @@ export class RegisterRequestModalComponent implements OnInit {
           this.fields[0].templateOptions?.options = subjects.map(subject => {
             return { key: subject.id, value: subject.name }
           })
-
-          console.log(this.fields[0].templateOptions?.options)
         }
 
       })
@@ -93,16 +91,17 @@ export class RegisterRequestModalComponent implements OnInit {
   }
 
 
-  onSubmit(value: HelpRequest) {
+  async onSubmit(value: HelpRequest) {
 
     this.model!.subject =  this.subjects.find((subject) => {
       return subject.id == this.model?.subject.name;
     })
 
-    this.databaseService.addResolvedRequest(this.model!)
+    await this.databaseService.addResolvedRequest(this.model!)
     this.open = false;
 
     alert('Se registró a asesoría con éxito');
+    window.location.reload();
 
   }
 
