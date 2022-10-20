@@ -5,6 +5,7 @@
   closeBtnText="Cancelar solicitud"
   [open]="open"
   >
+  <p>Registra tu asesoría aquí una vez que la hayas recibido</p>
   <form [formGroup]="form" (ngSubmit)="onSubmit(model!)" class="py-2">
     <formly-form class="pr-6" [form]="form" [fields]="fields" [model]="model"></formly-form>
     <app-submit-button label="Registrar asesoría"></app-submit-button>
