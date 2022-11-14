@@ -1,5 +1,36 @@
 <!-- Announcements -->
-<p class="text-lg md:text-2xl py-4">Avisos</p>
-<div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4">
-  <img class="w-96 mx-auto py-4" [src]="announcement.url" *ngFor="let announcement of announcement$ | async">
+<p class="text-lg md:text-2xl py-2">Avisos</p>
+<!-- <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4">
+  <img
+    class="w-96 mx-auto py-4"
+    [src]="announcement.url"
+    *ngFor="let announcement of announcement$ | async"
+  />
+</div> -->
+
+<div class="overflow-y-auto max-h-44 drop-shadow-md">
+  <ul class="divide-y divide-indigo-100 p-2 rounded-md bg-indigo-50">
+    <li
+      *ngFor="let announcement of mockAnouncements"
+      class="py-1 hover:bg-indigo-100 transition ease-in-out cursor-pointer pl-1 rounded-md"
+    >
+      <a [href]="announcement.link" target="_blank">
+        <div class="flex items-center space-x-4">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate">
+              {{ announcement.subject }}
+            </p>
+            <p class="text-sm text-gray-700 truncate">
+              {{ announcement.topic }}
+            </p>
+          </div>
+          <div
+            class="inline-flex items-center text-base font-semibold text-gray-900"
+          >
+            {{ announcement.date.toLocaleDateString("es-mexico") }}
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
 </div>
