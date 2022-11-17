@@ -14,14 +14,14 @@
       *ngFor="let announcement of mockAnouncements"
       class="py-1 hover:bg-indigo-100 transition ease-in-out cursor-pointer pl-1 rounded-md"
     >
-      <a [href]="announcement.link" target="_blank">
+      <a (click)="selectAnnouncement(announcement)" target="_blank">
         <div class="flex items-center space-x-4">
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-gray-900 truncate">
-              {{ announcement.subject }}
+              {{ announcement.title }}
             </p>
             <p class="text-sm text-gray-700 truncate">
-              {{ announcement.topic }}
+              {{ announcement.subject }}
             </p>
           </div>
           <div
@@ -34,3 +34,26 @@
     </li>
   </ul>
 </div>
+
+<app-modal
+  [title]="selectedAnnouncement.title"
+  body=""
+  [canClose]="true"
+  closeBtnText="Cerrar"
+  [open]="open"
+  (onClose)="open = false"
+>
+  <p class="my-2 text-gray-700">
+    {{ selectedAnnouncement.subject }}
+  </p>
+
+  <img
+    class="h-96 md:ml-20"
+    [src]="selectedAnnouncement.url"
+    alt="announcement url"
+  />
+
+  <p class="mt-2 text-gray-700">
+    {{ selectedAnnouncement.date.toLocaleDateString("es-mexico") }}
+  </p>
+</app-modal>

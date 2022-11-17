@@ -9,34 +9,43 @@ import { Announcement } from '../../models/Announcement';
   styleUrls: ['./announcements.component.scss'],
 })
 export class AnnouncementsComponent implements OnInit {
+  open = false;
   announcement$: Observable<Announcement[]>;
 
   mockAnouncements = [
     {
+      title: 'Herencia',
       subject: 'Programación Orientada a Objetos',
-      topic: 'Herencia',
       date: new Date(2022, 11, 21),
-      link: 'https://www.instagram.com/stories/maestec/2971526079639712761/',
+      url: 'https://aimint.org/ap/wp-content/uploads/sites/18/2016/04/image-placeholder-vertical-200x300.jpg',
     },
     {
+      title: 'Integrales Trigonometricas',
       subject: 'Modelación Matemática Intermedia',
-      topic: 'Integrales Trigonometricas',
       date: new Date(2022, 11, 22),
-      link: 'https://www.instagram.com/stories/maestec/2971526079639712761/',
+      url: 'https://aimint.org/ap/wp-content/uploads/sites/18/2016/04/image-placeholder-vertical-200x300.jpg',
     },
     {
+      title: 'Análisis financiero',
       subject: 'Análisis financiero',
-      topic: 'Análisis financiero',
       date: new Date(2022, 11, 24),
-      link: 'https://www.instagram.com/stories/maestec/2971526079639712761/',
+      url: 'https://aimint.org/ap/wp-content/uploads/sites/18/2016/04/image-placeholder-vertical-200x300.jpg',
     },
     {
+      title: 'Análisis financiero',
       subject: 'Análisis financiero',
-      topic: 'Análisis financiero',
       date: new Date(2022, 11, 25),
-      link: 'https://www.instagram.com/stories/maestec/2971526079639712761/',
+      url: 'https://aimint.org/ap/wp-content/uploads/sites/18/2016/04/image-placeholder-vertical-200x300.jpg',
     },
   ];
+
+  selectedAnnouncement = this.mockAnouncements[0];
+
+  selectAnnouncement(announcement: any) {
+    this.selectedAnnouncement = announcement;
+    this.open = true;
+    console.log(this.selectedAnnouncement);
+  }
 
   constructor(private databaseService: DatabaseService) {
     this.announcement$ = this.databaseService.getAnnouncements();
