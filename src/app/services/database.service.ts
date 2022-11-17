@@ -273,7 +273,9 @@ export class DatabaseService {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];
     return this.afs
       .collection(`schools/${emailDomain}/announcements`, (ref) =>
-        ref.where('endDate', '>', new Date()).orderBy('endDate', 'asc')
+        ref
+          .where('endDate', '>', new Date(new Date().getDate() - 1))
+          .orderBy('endDate', 'asc')
       )
       .valueChanges({ idField: 'id' }) as Observable<Announcement[]>;
   }

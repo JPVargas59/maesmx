@@ -1,8 +1,12 @@
+import { Timestamp } from 'firebase/firestore';
+
 export interface Announcement {
   id?: string;
-  title?: string;
+  title: string;
+  subject: string;
+  url: string;
+  endDate: Timestamp;
+  registerForm: string;
   description?: string;
-  url?: string;
   startDate?: Date;
-  endDate?: Date;
 }

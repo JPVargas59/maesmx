@@ -1,5 +1,5 @@
 <!-- Announcements -->
-<p class="text-lg md:text-2xl py-2">Avisos</p>
+<p class="text-lg font-bold md:text-2xl py-2">Avisos</p>
 <!-- <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4">
   <img
     class="w-96 mx-auto py-4"
@@ -9,9 +9,12 @@
 </div> -->
 
 <div class="overflow-y-auto max-h-44 drop-shadow-md">
-  <ul class="divide-y divide-indigo-100 p-2 rounded-md bg-indigo-50">
+  <ul
+    *ngIf="anouncements.length > 0; else noAnnouncements"
+    class="divide-y divide-indigo-100 p-2 rounded-md bg-indigo-50"
+  >
     <li
-      *ngFor="let announcement of mockAnouncements"
+      *ngFor="let announcement of anouncements"
       class="py-1 hover:bg-indigo-100 transition ease-in-out cursor-pointer pl-1 rounded-md"
     >
       <a (click)="selectAnnouncement(announcement)" target="_blank">
@@ -27,12 +30,17 @@
           <div
             class="inline-flex items-center text-base font-semibold text-gray-900"
           >
-            {{ announcement.date.toLocaleDateString("es-mexico") }}
+            {{ announcement.endDate.toDate().toLocaleDateString("es-mexico") }}
           </div>
         </div>
       </a>
     </li>
   </ul>
+  <ng-template #noAnnouncements>
+    <div class="p-2 rounded-md bg-indigo-50">
+      <p class="text-center">Espera nuevos avisos pronto...</p>
+    </div>
+  </ng-template>
 </div>
 
 <app-modal
@@ -48,12 +56,20 @@
   </p>
 
   <img
-    class="h-96 md:ml-20"
+    class="h-96 md:ml-20 mb-2 mx-auto"
     [src]="selectedAnnouncement.url"
     alt="announcement url"
   />
 
+  <a
+    class="mt-2 font-medium underline text-indigo-700"
+    [href]="selectedAnnouncement.registerForm"
+    target="_blank"
+  >
+    Registrate aquí!
+  </a>
+
   <p class="mt-2 text-gray-700">
-    {{ selectedAnnouncement.date.toLocaleDateString("es-mexico") }}
+    {{ selectedAnnouncement.endDate.toDate().toLocaleDateString("es-mexico") }}
   </p>
 </app-modal>
