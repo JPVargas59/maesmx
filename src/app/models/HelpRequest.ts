@@ -1,16 +1,17 @@
-import {PeerInfo, UserInfo} from "./UserInfo";
-import {Subject} from "./Subject";
-import firebase from "firebase/compat";
+import { PeerInfo, UserInfo } from './UserInfo';
+import { Subject } from './Subject';
+import firebase from 'firebase/compat';
 import Timestamp = firebase.firestore.Timestamp;
 
 export interface HelpRequest {
   id?: string;
   userInfo: UserInfo;
+  peerInfo?: PeerInfo;
   subject: Subject;
+  comment?: String;
+  rating?: Number;
   createdAt: Timestamp;
   updatedAt: Timestamp;
-  comment?: string;
-  peerInfo?: PeerInfo;
   resolvedAt?: Timestamp;
   status?: Status;
 }
@@ -20,5 +21,5 @@ export enum Status {
   ACCEPTED = 'ACCEPTED',
   RESOLVED = 'RESOLVED',
   CANCELLED = 'CANCELLED',
-  MISSED = 'NOT_RECEIVED'
+  MISSED = 'NOT_RECEIVED',
 }
