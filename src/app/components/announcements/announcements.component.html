@@ -56,20 +56,33 @@
   </p>
 
   <img
-    class="h-96 md:ml-20 mb-2 mx-auto"
+    class="h-96 mb-2 mx-auto"
     [src]="selectedAnnouncement.url"
     alt="announcement url"
   />
 
-  <a
+  <p class="mt-2 font-bold text-gray-700">
+    Fecha:
+    {{ selectedAnnouncement.endDate.toDate().toLocaleDateString("es-mexico") }}
+  </p>
+
+  <hr class="my-2" />
+
+  <p class="font-medium text-indigo-900">Registra tu asistencia!</p>
+  <!-- <a
     class="mt-2 font-medium underline text-indigo-700"
     [href]="selectedAnnouncement.registerForm"
     target="_blank"
   >
     Registrate aquí!
-  </a>
-
-  <p class="mt-2 text-gray-700">
-    {{ selectedAnnouncement.endDate.toDate().toLocaleDateString("es-mexico") }}
-  </p>
+  </a> -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit(model!)" class="py-2">
+    <formly-form
+      class="pr-6"
+      [form]="form"
+      [fields]="fields"
+      [model]="model"
+    ></formly-form>
+    <app-submit-button label="Registrar asistencia"></app-submit-button>
+  </form>
 </app-modal>
