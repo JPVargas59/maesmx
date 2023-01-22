@@ -1,5 +1,69 @@
 <h1 class="text-3xl font-bold">Bienvenid@ Coordi</h1>
-<p class="text-md text-gray-600">Aqui podrás realizar tus reportes y monitoreo de la plataforma.</p>
+<p class="text-md text-gray-600">
+  Aqui podrás realizar tus reportes y monitoreo de la plataforma.
+</p>
 
+<!-- <app-search-peer></app-search-peer> -->
+<h2 class="text-2xl font-bold">MAE activos</h2>
+<div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4">
+    <div *ngFor="let peer of activePeers$ | async">
+      <div class="bg-white rounded shadow p-4 break-inside-avoid-column my-2" *ngIf="peer && !utils.datePastHours(peer.activeSession!.startTime!.toDate(), 12)">
+        <div class="flex justify-center ">
+          <img [src]="peer.photoURL ?? 'https://randomuser.me/api/portraits/lego/5.jpg'" alt="profilePic" class="rounded-full h-14 w-14 my-auto">
+          <div class="flex flex-col px-2">
+            <a class="text-xl font-bold hover:text-indigo-800 cursor-pointer transition-all" routerLink="/student/profile/{{peer.uid}}">{{peer.name}}</a>
+            <h1 class="my-auto text-start text-sm text-gray-600">{{peer.career ?? 'MAE sin carrera'}}</h1>
+  
+            <a *ngIf="isUrl(peer.activeSession!.location!)" [href]="peer.activeSession!.location" target="_blank"
+               class="my-auto text-start text-xs text-blue-600 underline decoration-blue-500">en este link</a>
+            <h1 *ngIf="!isUrl(peer.activeSession!.location!)" class="my-auto text-start text-xs text-gray-600">
+              en {{peer.activeSession!.location}}</h1>
+  
+            <h1 class="my-auto text-start text-xs text-gray-600">
+              Desde las {{peer.activeSession!.startTime!.toDate() | date: 'HH:mm'}}</h1>
+            <p class="rounded-full bg-purple-600 text-white py-0.5 px-2 my-0.5 text-xs w-fit" *ngIf="peer.role == 'coordi'">coordi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<hr class="my-4">
 
-<app-search-peer></app-search-peer>
+<h2 class="text-2xl font-bold">Consulta los horarios de los MAE</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    <app-submit-button label="Buscar"></app-submit-button>
+  </form>
+  
+  <div *ngIf="schedules !== null">
+    <div class="bg-white p-4 rounded-md my-2" *ngFor="let schedule of schedules">
+      <div class="flex flex-col">
+        <a class="text-xl font-bold hover:text-indigo-800 cursor-pointer transition-all" routerLink="/student/profile/{{schedule.userInfo.uid}}">{{schedule.userInfo.name}}</a>
+        <p class="text-xs text-gray-600">{{schedule.userInfo.career}} - {{schedule.userInfo.campus}}</p>
+        <p class="text-xs text-gray-600">Los {{utilsService.weekDayToDay(schedule.day)}} en horario de:</p>
+        <div class="flex flex-row flex-wrap">
+          <div *ngFor="let hour of schedule.hours">
+            <p class="px-4 py-2 mr-2 my-2 text-white bg-green-600 rounded">{{translateHour(hour)}}</p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+    <div class="text-center w-full bg-white rounded-md p-4"
+         *ngIf="schedules && schedules.length == 0">
+      <h1 class="text-2xl my-1">
+        No hay horarios disponibles :(
+      </h1>
+      <p class="text-md text-gray-600 my-1">
+        En ocasiones una materia se puede parecer mucho a otra. Te recomendamos buscar materias similares.
+      </p>
+      <p class="text-md text-gray-600 my-1">
+        Puedes enviarnos una solicitud o revisar quienes están en linea entrando a la siguiente página
+      </p>
+      <button routerLink="/student/home" class="my-2 px-4 py-2 rounded-md bg-indigo-700 text-white">Ver MAE en linea</button>
+  
+    </div>
+  
+  </div>
