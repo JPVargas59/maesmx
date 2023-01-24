@@ -30,40 +30,52 @@
   
 <hr class="my-4">
 
-<h2 class="text-2xl font-bold">Consulta los horarios de los MAE</h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-    <app-submit-button label="Buscar"></app-submit-button>
-  </form>
-  
-  <div *ngIf="schedules !== null">
-    <div class="bg-white p-4 rounded-md my-2" *ngFor="let schedule of schedules">
-      <div class="flex flex-col">
-        <a class="text-xl font-bold hover:text-indigo-800 cursor-pointer transition-all" routerLink="/student/profile/{{schedule.userInfo.uid}}">{{schedule.userInfo.name}}</a>
-        <p class="text-xs text-gray-600">{{schedule.userInfo.career}} - {{schedule.userInfo.campus}}</p>
-        <p class="text-xs text-gray-600">Los {{utilsService.weekDayToDay(schedule.day)}} en horario de:</p>
-        <div class="flex flex-row flex-wrap">
-          <div *ngFor="let hour of schedule.hours">
-            <p class="px-4 py-2 mr-2 my-2 text-white bg-green-600 rounded">{{translateHour(hour)}}</p>
+<div class="md:grid md:grid-cols-2 md:gap-4">
+  <div>
+    <h2 class="text-2xl font-bold">Consulta los horarios de los MAE</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+        <app-submit-button label="Buscar"></app-submit-button>
+    </form> 
+    
+    <div *ngIf="schedules !== null">
+      <div class="bg-white p-4 rounded-md my-2" *ngFor="let schedule of schedules">
+        <div class="flex flex-col">
+          <p class="text-xs text-gray-600">{{schedule.userInfo.career}} - {{schedule.userInfo.campus}}</p>
+          <!-- <p class="text-xs text-gray-600">Los {{utilsService.weekDayToDay(schedule.day)}} en horario de:</p> -->
+          
+          <div class="flex flex-row items-center">
+            <a class="basis-2/3 align-middle	text-xl font-bold hover:text-indigo-800 cursor-pointer transition-all" routerLink="/student/profile/{{schedule.userInfo.uid}}">{{schedule.userInfo.name}}</a>
+            <div class="basis-1/3	flex flex-row flex-wrap">
+              <!-- <div *ngFor="let hour of schedule.hours">
+                <p class="px-4 py-2 mr-2 my-2 text-white bg-green-600 rounded">{{translateHour(hour)}}</p>
+              </div> -->
+              <p class="px-4 py-2 mr-2 my-2 text-white bg-green-600 rounded"> {{getStartHour(schedule.hours)}} - {{getFinishHour(schedule.hours)}} </p>
+            </div>
           </div>
+    
         </div>
-  
       </div>
+    
+      <div class="text-center w-full bg-white rounded-md p-4"
+            *ngIf="schedules && schedules.length == 0">
+        <h1 class="text-2xl my-1">
+          No hay horarios disponibles :(
+        </h1>
+        <p class="text-md text-gray-600 my-1">
+          En ocasiones una materia se puede parecer mucho a otra. Te recomendamos buscar materias similares.
+        </p>
+        <p class="text-md text-gray-600 my-1">
+          Puedes enviarnos una solicitud o revisar quienes están en linea entrando a la siguiente página
+        </p>
+        <button routerLink="/student/home" class="my-2 px-4 py-2 rounded-md bg-indigo-700 text-white">Ver MAE en linea</button>
+    
+      </div>
+    
     </div>
-  
-    <div class="text-center w-full bg-white rounded-md p-4"
-         *ngIf="schedules && schedules.length == 0">
-      <h1 class="text-2xl my-1">
-        No hay horarios disponibles :(
-      </h1>
-      <p class="text-md text-gray-600 my-1">
-        En ocasiones una materia se puede parecer mucho a otra. Te recomendamos buscar materias similares.
-      </p>
-      <p class="text-md text-gray-600 my-1">
-        Puedes enviarnos una solicitud o revisar quienes están en linea entrando a la siguiente página
-      </p>
-      <button routerLink="/student/home" class="my-2 px-4 py-2 rounded-md bg-indigo-700 text-white">Ver MAE en linea</button>
-  
-    </div>
-  
   </div>
+
+  <div>
+    <h2 class="text-2xl font-bold">Marcar asistencia</h2>
+  </div>
+</div>

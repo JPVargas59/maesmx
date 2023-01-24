@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { max, Observable } from 'rxjs';
 import { PeerInfo } from '../../models/UserInfo';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -97,5 +97,27 @@ export class HomeComponent implements OnInit {
 
   translateHour(hour: string) {
     return this.utilsService.hourToString(Number(hour));
+  }
+
+  getStartHour(hourArray: WeekDays[]){
+    let minHour = 100;
+    hourArray.forEach(hour => {
+      if (Number(hour) < minHour) {
+        minHour = Number(hour);
+      }
+    });
+    
+    return this.translateHour(minHour.toString());
+  }
+
+  getFinishHour(hourArray: WeekDays[]){
+    let maxHour = 0;
+    hourArray.forEach(hour => {
+      if (Number(hour) > maxHour) {
+        maxHour = Number(hour);
+      }
+    });
+    
+    return this.translateHour((maxHour + 0.5).toString());
   }
 }
