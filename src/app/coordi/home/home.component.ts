@@ -41,6 +41,28 @@ export class HomeComponent implements OnInit {
     },
   ];
 
+  asistanceForm = new FormGroup({});
+  asistanceModel = {
+    asistance: undefined,
+  };
+  asistanceFields: FormlyFieldConfig[] = [
+    {
+      key: 'day',
+      type: 'select',
+      templateOptions: {
+        options: [
+            {label: 'A', value: 'asistencia'},
+            {label: 'F', value: 'falta'},
+            {label: 'RR', value: 'retardo'},
+            {label: 'D', value: 'discord'},
+            {label: 'JMT', value: 'junta-mt'},
+            {label: 'R', value: 'reponer'},
+            {label: 'J', value: 'ausencia-justificada'},
+        ],
+      },
+    },
+  ];
+
   schedules!: PeerSchedule[];
 
   activePeers$: Observable<PeerInfo[]>;

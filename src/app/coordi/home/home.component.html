@@ -39,7 +39,7 @@
     </form> 
     
     <div *ngIf="schedules !== null">
-      <div class="bg-white p-4 rounded-md my-2" *ngFor="let schedule of schedules">
+      <div class="bg-white py-2 px-4 shadow-sm rounded-md my-2" *ngFor="let schedule of schedules">
         <div class="flex flex-col">
           <p class="text-xs text-gray-600">{{schedule.userInfo.career}} - {{schedule.userInfo.campus}}</p>
           <!-- <p class="text-xs text-gray-600">Los {{utilsService.weekDayToDay(schedule.day)}} en horario de:</p> -->
@@ -77,5 +77,36 @@
 
   <div>
     <h2 class="text-2xl font-bold">Marcar asistencia</h2>
+    <h3 class="texr-sm font-extralight mb-2">Martes, 24 - Enero</h3>
+    <table class="table-auto w-full text-left bg-white rounded-md shadow-sm">
+      <thead class="border-b border-gray-300">
+        <tr>
+          <th class="px-4 py-2">Matricula</th>
+          <th class="px-4 py-2">Nombre</th>
+          <th class="px-4 py-2">Horario</th>
+          <th class="px-4 py-2">Asistió</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b hover:bg-gray-100">
+          <td class="px-4 py-2">A01741757</td>
+          <td class="px-4 py-2">Luis Ángel Guzmán Iribe</td>
+          <td class="px-4 py-2">
+            <p class="text-white bg-green-600 rounded px-2 py-2">
+              11:30 - 14:00
+            </p>
+          </td>
+          <td class="px-4 w-20">
+            <!-- <div class="flex items-center">
+              <input id="checkbox-asistance" type="checkbox" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
+              <label for="checkbox-asistance" class="sr-only">checkbox</label>
+            </div> -->
+            <form [formGroup]="asistanceForm" (ngSubmit)="onSubmit()">
+              <formly-form [form]="asistanceForm" [fields]="asistanceFields" [model]="asistanceModel"></formly-form>
+            </form> 
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
