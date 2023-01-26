@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {FormlyFieldConfig} from "@ngx-formly/core";
-import {DatabaseService} from "../../services/database.service";
-import {Router} from "@angular/router";
-import {PeerInfo, Role, UserInfo} from "../../models/UserInfo";
+import { FormGroup } from "@angular/forms";
+import { FormlyFieldConfig } from "@ngx-formly/core";
+import { Major } from 'src/app/models/Major';
+import { DatabaseService } from "../../services/database.service";
+import { Router } from "@angular/router";
+import { PeerInfo, Role, UserInfo } from "../../models/UserInfo";
 
 @Component({
   selector: 'app-fill-profile',
@@ -42,24 +43,33 @@ export class FillProfileComponent implements OnInit {
       type: 'input',
       templateOptions: {
         label: 'Nombre',
-        placeholder: 'Escribe tu nombre completo',
+        placeholder: 'Escribe tu nombre de pila',
+        required: true,
+      }
+    },
+    {
+      key: 'lastname',
+      type: 'input',
+      templateOptions: {
+        label: 'Apellido',
+        placeholder: 'Escribe tu apellido ',
         required: true,
       }
     },
     {
       key: 'career',
-      type: 'input',
+      type: 'select',
       templateOptions: {
         label: 'Carrera',
-        placeholder: 'Escribe tu carrera',
+        options: []
       }
     },
     {
       key: 'campus',
-      type: 'input',
+      type: 'select',
       templateOptions: {
         label: 'Campus',
-        placeholder: 'Escribe tu campus',
+        options: []
       }
     }, {
       key: 'role',
@@ -96,10 +106,29 @@ export class FillProfileComponent implements OnInit {
       console.log(userInfo);
       this.model = userInfo;
     })
+
+    this.database.getMajors().subscribe(majors => {
+      this.fields[4].templateOptions!.options = majors.map(majors => {
+        return {
+          label: majors.name,
+          value: majors.id
+        }
+      })
+    })
+
+    this.database.getCampus().subscribe(campus => {
+      this.fields[5].templateOptions!.options = campus.map(campus => {
+        return {
+          label: campus.name,
+          value: campus.id
+        }
+      })
+    })
   }
 
   onSubmit(value: any) {
     delete value.email;
+    value.name = value.name + ' ' + value.lastname;
     // update userInfo
     this.database.updateUserInfo(localStorage.getItem('uid'), value).then(() => {
       console.log('User info updated');

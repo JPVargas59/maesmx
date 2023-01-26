@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, of } from 'rxjs';
 import { PeerInfo, Role, UserInfo } from '../models/UserInfo';
 import { Subject } from '../models/Subject';
+import { Major } from '../models/Major';
+import { Campus } from '../models/Campus';
 import { HelpRequest, Status } from '../models/HelpRequest';
 import * as firestore from 'firebase/firestore';
 import { PeerSession, PeerSessionStatus } from '../models/PeerSession';
@@ -94,6 +96,22 @@ export class DatabaseService {
         ref.orderBy('name', 'asc')
       )
       .valueChanges({ idField: 'id' }) as Observable<Subject[]>;
+  }
+
+  getMajors(): Observable<Major[]> {
+    const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    return this.afs
+      .collection(`schools/${emailDomain}/majors`)
+      .valueChanges({ idField: 'id' }) as Observable<Major[]>;
+
+  }
+
+  getCampus(): Observable<Campus[]> {
+    const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    return this.afs
+      .collection(`schools/${emailDomain}/campus`)
+      .valueChanges({ idField: 'id' }) as Observable<Campus[]>;
+
   }
 
   // add request to request collection with userInfo and subject and add request to user collection
