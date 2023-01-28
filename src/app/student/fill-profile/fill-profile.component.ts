@@ -39,7 +39,7 @@ export class FillProfileComponent implements OnInit {
       }
     },
     {
-      key: 'name',
+      key: 'firstname',
       type: 'input',
       templateOptions: {
         label: 'Nombre',
@@ -128,8 +128,9 @@ export class FillProfileComponent implements OnInit {
 
   onSubmit(value: any) {
     delete value.email;
-    value.name = value.name + ' ' + value.lastname;
+    value.name = value.firstname.trim() + ' ' + value.lastname.trim();
     // update userInfo
+    console.log(value)
     this.database.updateUserInfo(localStorage.getItem('uid'), value).then(() => {
       console.log('User info updated');
       alert('Información actualizada');

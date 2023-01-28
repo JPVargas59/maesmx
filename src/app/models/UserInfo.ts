@@ -8,6 +8,8 @@ export interface UserInfo {
   uid: string;
   email: string;
   name?: string;
+  lastname?: string;
+  firstname?: string;
   photoURL?: string;
   role: Role;
   career?: string;
