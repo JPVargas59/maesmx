@@ -31,7 +31,7 @@ export class RegisterRequestModalComponent implements OnInit {
       type: 'textarea',
       templateOptions: {
         label: 'Comentario',
-        placeholder: 'Agrega un comentario (opcional)',
+        placeholder: 'Agrega un comentario',
         required: false,
       },
     },
