@@ -57,4 +57,8 @@ export class AnnouncementsComponent implements OnInit {
   async onSubmit(value: HelpRequest) {
     console.log('Submit!');
   }
+
+  registerAssistance(){
+    console.log("Hello world!")
+  }
 }

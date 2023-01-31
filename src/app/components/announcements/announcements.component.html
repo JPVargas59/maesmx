@@ -65,10 +65,15 @@
     Fecha:
     {{ selectedAnnouncement.endDate.toDate().toLocaleDateString("es-mexico") }}
   </p>
-
+  
   <hr class="my-2" />
 
-  <p class="font-medium text-indigo-900">Registra tu asistencia!</p>
+  <p>El día de la sesión podrás acceder en <a (click)="registerAssistance()" class="text-indigo-600 underline" href="https://www.youtube.com/watch?v=xpxEM1eq8D8&t=1s" target="_blank" rel="noreferrer noopener">este enlace</a>.</p>
+  <p class="font-thin text-sm">Para nosotros es importante contabilizar el número de personas que atienden a la sesión, por lo tanto te pedimos acceder al enlace desde esta página, ya que de otro modo no se contabiliza la asesoría.</p>
+  
+  <hr class="my-2" />
+
+  <p class="font-medium text-indigo-900">Preregistro</p>
   <!-- <a
     class="mt-2 font-medium underline text-indigo-700"
     [href]="selectedAnnouncement.registerForm"
@@ -83,6 +88,7 @@
       [fields]="fields"
       [model]="model"
     ></formly-form>
-    <app-submit-button label="Registrar asistencia"></app-submit-button>
+    <app-submit-button label="Completar preregistro"></app-submit-button>
   </form>
+
 </app-modal>

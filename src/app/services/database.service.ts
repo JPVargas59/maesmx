@@ -292,7 +292,7 @@ export class DatabaseService {
     return this.afs
       .collection(`schools/${emailDomain}/announcements`, (ref) =>
         ref
-          .where('endDate', '>', new Date(new Date().getDate() - 1))
+          .where('endDate', '>', new Date())
           .orderBy('endDate', 'asc')
       )
       .valueChanges({ idField: 'id' }) as Observable<Announcement[]>;
