@@ -298,6 +298,30 @@ export class DatabaseService {
       .valueChanges({ idField: 'id' }) as Observable<Announcement[]>;
   }
 
+  addAnnouncementAssistance(announcementId: string){
+    const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    const userUid = localStorage.getItem('uid');
+    const user = JSON.parse(localStorage.getItem('user') ?? '{name: null}');
+
+    this.afs.doc(`schools/${emailDomain}/announcements/${announcementId}/attendants/${userUid}`)
+    .set({
+      ...user,
+      attended: true
+    }, {merge: true}); 
+  }
+
+  addAnnouncementComment(announcementId: string, comment: string){
+    const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    const userUid = localStorage.getItem('uid');
+    const user = JSON.parse(localStorage.getItem('user') ?? '{name: null}');
+
+    this.afs.doc(`schools/${emailDomain}/announcements/${announcementId}/attendants/${userUid}`)
+    .set({
+      ...user,
+      comment
+    }, {merge: true}); 
+  }
+
   // get settings from schools collection
   getSettings(): Observable<Settings> {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];

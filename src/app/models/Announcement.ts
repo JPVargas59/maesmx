@@ -1,7 +1,7 @@
 import { Timestamp } from 'firebase/firestore';
 
 export interface Announcement {
-  id?: string;
+  id: string;
   title: string;
   subject: string;
   url: string;

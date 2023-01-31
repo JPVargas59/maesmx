@@ -17,6 +17,7 @@ export class AnnouncementsComponent implements OnInit {
   announcement$: Observable<Announcement[]>;
   anouncements: Announcement[] = [];
   selectedAnnouncement: Announcement = {
+    id: '',
     title: '',
     subject: '',
     registerForm: '',
@@ -34,7 +35,7 @@ export class AnnouncementsComponent implements OnInit {
         label: 'Comentario',
         placeholder:
           '¿Cuáles son tus principales temas de interés? Ej. Funciones Lineales / Raices / Cuadráticas',
-        required: false,
+        required: true,
       },
     },
   ];
@@ -54,11 +55,14 @@ export class AnnouncementsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  async onSubmit(value: HelpRequest) {
-    console.log('Submit!');
+  // TODO: El valor de entrada del formulario no se guarda
+  onSubmit(value: HelpRequest) {
+    console.log(value); 
+    this.databaseService.addAnnouncementComment(this.selectedAnnouncement.id, 'Comentario de ejemplo');
   }
 
-  registerAssistance(){
-    console.log("Hello world!")
+  registerAssistance(announcementId: string){
+    console.log("Hello world!");
+    this.databaseService.addAnnouncementAssistance(announcementId)
   }
 }
