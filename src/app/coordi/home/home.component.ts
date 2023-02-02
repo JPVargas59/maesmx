@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { max, Observable } from 'rxjs';
+import { max, Observable, timeout } from 'rxjs';
 import { PeerInfo } from '../../models/UserInfo';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -49,17 +49,17 @@ export class HomeComponent implements OnInit {
   };
   asistanceFields: FormlyFieldConfig[] = [
     {
-      key: 'day',
+      key: 'asistance',
       type: 'select',
       templateOptions: {
         options: [
-            {label: 'A', value: 'asistencia'},
-            {label: 'F', value: 'falta'},
-            {label: 'RR', value: 'retardo'},
-            {label: 'D', value: 'discord'},
-            {label: 'JMT', value: 'junta-mt'},
-            {label: 'R', value: 'reponer'},
-            {label: 'J', value: 'ausencia-justificada'},
+            {label: 'A', value: 'A'},
+            {label: 'F', value: 'F'},
+            {label: 'RR', value: 'RR'},
+            {label: 'D', value: 'D'},
+            {label: 'JMT', value: 'JMT'},
+            {label: 'R', value: 'R'},
+            {label: 'J', value: 'J'},
         ],
       },
     },
@@ -69,6 +69,8 @@ export class HomeComponent implements OnInit {
 
   activePeers$: Observable<PeerInfo[]>;
   dayPeers$: Observable<PeerInfo[]>;
+  attendanceList$: Observable<any[]>;
+  attendanceList: any[] = [];
 
   constructor(
     private databaseService: DatabaseService,
@@ -78,6 +80,7 @@ export class HomeComponent implements OnInit {
   ) {
     this.activePeers$ = this.databaseService.getUsersWithActiveSession();
     this.dayPeers$ = this.databaseService.getUsersByWeekDays(WeekDays.Monday);
+    this.attendanceList$ = this.databaseService.getTodaysAttendance();
   }
 
   ngOnInit(): void {
@@ -100,7 +103,9 @@ export class HomeComponent implements OnInit {
         };
       });
     });
-    console.log('peers', this.dayPeers$)
+
+    // TODO: Esto genera demasiadas lecturas?
+    this.attendanceList$.subscribe(peers => this.attendanceList = peers)
   }
 
   onSubmit() {
@@ -114,6 +119,10 @@ export class HomeComponent implements OnInit {
           this.schedules = peers;
         });
     }
+  }
+
+  onChange(peer: PeerInfo){
+    this.databaseService.addAttendance(peer, this.asistanceModel.asistance ?? '')
   }
 
   isUrl(url: string): boolean {
@@ -148,9 +157,23 @@ export class HomeComponent implements OnInit {
     return this.translateHour((maxHour + 0.5).toString());
   }
 
-  dateFormat(date: Date){
-    const weekDays = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-    const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    return `${weekDays[date.getDay()]}, ${date.getDate()} / ${months[date.getMonth()]} / ${date.getFullYear()}`;
+  // Revisa el estado del reporte en la colección 'attendance' para colorear la row del MAE
+  // O(n)
+  checkAttendance(checkPeer: PeerInfo){
+    for (const peer of this.attendanceList) {
+      if (checkPeer.uid === peer.uid) {
+        switch (peer.report) {
+          case 'A':
+            return 'bg-green-50 hover:bg-green-100';
+          case 'F':
+            return 'bg-red-50 hover:bg-red-100';
+          case 'RR':
+            return 'bg-orange-50 hover:bg-orange-100';
+            default:
+            return 'bg-indigo-50 hover:bg-indigo-100';
+        }
+      }
+    }
+    return '';
   }
 }

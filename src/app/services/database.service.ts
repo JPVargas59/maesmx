@@ -367,6 +367,23 @@ export class DatabaseService {
       .valueChanges({ idField: 'id' }) as Observable<PeerSchedule[]>;
   }
 
+  addAttendance(peer: PeerInfo, report: string) {
+    const dateString = (new Date()).toISOString().split('T')[0]
+    this.afs
+      .collection('attendance').doc(dateString).collection('report').doc(peer.uid).set({
+        ...peer,
+        report
+      }, { merge: true })
+  }
+
+  getTodaysAttendance() {
+    const dateString = (new Date()).toISOString().split('T')[0]
+
+    return this.afs
+      .collection('attendance').doc(dateString).collection('report')
+      .valueChanges() as Observable<any[]>;
+  }
+
   getUser(uid: string): Observable<PeerInfo> {
     return this.afs
       .doc<any>(`users/${uid}`)
