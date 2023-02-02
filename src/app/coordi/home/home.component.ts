@@ -17,6 +17,8 @@ import { WeekDays, WeekDaysTranslate } from '../../models/Settings';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  today = new Date();
+
   form = new FormGroup({});
   model = {
     subject: undefined,
@@ -66,6 +68,7 @@ export class HomeComponent implements OnInit {
   schedules!: PeerSchedule[];
 
   activePeers$: Observable<PeerInfo[]>;
+  dayPeers$: Observable<PeerInfo[]>;
 
   constructor(
     private databaseService: DatabaseService,
@@ -74,6 +77,7 @@ export class HomeComponent implements OnInit {
     public utils: UtilsService
   ) {
     this.activePeers$ = this.databaseService.getUsersWithActiveSession();
+    this.dayPeers$ = this.databaseService.getUsersByWeekDays(WeekDays.Monday);
   }
 
   ngOnInit(): void {
@@ -96,6 +100,7 @@ export class HomeComponent implements OnInit {
         };
       });
     });
+    console.log('peers', this.dayPeers$)
   }
 
   onSubmit() {
@@ -121,7 +126,7 @@ export class HomeComponent implements OnInit {
     return this.utilsService.hourToString(Number(hour));
   }
 
-  getStartHour(hourArray: WeekDays[]){
+  getStartHour(hourArray: WeekDays[]|number[]){
     let minHour = 100;
     hourArray.forEach(hour => {
       if (Number(hour) < minHour) {
@@ -132,7 +137,7 @@ export class HomeComponent implements OnInit {
     return this.translateHour(minHour.toString());
   }
 
-  getFinishHour(hourArray: WeekDays[]){
+  getFinishHour(hourArray: WeekDays[]|number[]){
     let maxHour = 0;
     hourArray.forEach(hour => {
       if (Number(hour) > maxHour) {
@@ -141,5 +146,11 @@ export class HomeComponent implements OnInit {
     });
     
     return this.translateHour((maxHour + 0.5).toString());
+  }
+
+  dateFormat(date: Date){
+    const weekDays = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    return `${weekDays[date.getDay()]}, ${date.getDate()} / ${months[date.getMonth()]} / ${date.getFullYear()}`;
   }
 }
