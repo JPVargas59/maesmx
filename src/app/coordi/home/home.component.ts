@@ -18,6 +18,7 @@ import { WeekDays, WeekDaysTranslate } from '../../models/Settings';
 })
 export class HomeComponent implements OnInit {
   today = new Date();
+  weekDaysArray = [WeekDays.Sunday, WeekDays.Monday, WeekDays.Tuesday, WeekDays.Wednesday, WeekDays.Thursday, WeekDays.Friday, WeekDays.Saturday]
 
   form = new FormGroup({});
   model = {
@@ -79,7 +80,7 @@ export class HomeComponent implements OnInit {
     public utils: UtilsService
   ) {
     this.activePeers$ = this.databaseService.getUsersWithActiveSession();
-    this.dayPeers$ = this.databaseService.getUsersByWeekDays(WeekDays.Monday);
+    this.dayPeers$ = this.databaseService.getUsersByWeekDays(this.weekDaysArray[this.today.getDay()]);
     this.attendanceList$ = this.databaseService.getTodaysAttendance();
   }
 
@@ -133,6 +134,29 @@ export class HomeComponent implements OnInit {
 
   translateHour(hour: string) {
     return this.utilsService.hourToString(Number(hour));
+  }
+
+  // TODO: Aquí se debería de poder pasar menos información
+  getTodaySchedule(peer: PeerInfo){
+    switch (this.today.getDay()) {
+      case 1:
+        return peer.weekSchedule?.monday
+      case 2:
+        return peer.weekSchedule?.tuesday
+      case 3:
+        return peer.weekSchedule?.wednesday
+      case 4:
+        return peer.weekSchedule?.thursday
+      case 5:
+        return peer.weekSchedule?.friday
+      case 6:
+        return peer.weekSchedule?.saturday
+      case 0:
+        return peer.weekSchedule?.sunday
+      default:
+        return peer.weekSchedule?.monday
+    }
+
   }
 
   getStartHour(hourArray: WeekDays[]|number[]){
