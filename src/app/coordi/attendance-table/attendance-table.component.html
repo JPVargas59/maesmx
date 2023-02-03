@@ -1,0 +1,34 @@
+<h2 class="text-2xl font-bold">Marcar asistencia</h2>
+<h3 class="texr-sm font-extralight mb-2 capitalize"> {{ today.toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}</h3>
+<table class="table-auto w-full text-left bg-white rounded-md shadow-sm">
+    <thead class="border-b border-gray-300">
+    <tr>
+        <th class="px-4 py-2">Matricula</th>
+        <th class="px-4 py-2">Nombre</th>
+        <th class="px-4 py-2">Horario</th>
+        <th class="px-4 py-2">Asistió</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let peer of dayPeers$ | async; index as indexOfelement;" class="border-b hover:bg-gray-100"
+        [ngClass]="checkAttendance(peer)"><!-- TODO: Esta linea se llama una vez por cada operación, y la función es O(n) se debería de poder mejorar de algún modo -->
+        <td class="px-4 py-2"> {{peer.uid.toUpperCase()}} </td>
+        <td class="px-4 py-2"> {{peer.name}} </td>
+        <td class="px-4 py-2">
+        <p class="text-white bg-green-600 rounded px-2 py-2 min-w-max">
+            {{ getStartHour(getTodaySchedule(peer) ?? []) }} - {{ getFinishHour(getTodaySchedule(peer) ?? []) }}
+        </p>
+        </td>
+        <td class="px-2 min-w-max">
+        <!-- <div class="flex items-center">
+            <input id="checkbox-asistance" type="checkbox" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
+            <label for="checkbox-asistance" class="sr-only">checkbox</label>
+        </div> -->
+        <form [formGroup]="asistanceForm" (change)="onChange(peer)">
+            <formly-form [form]="asistanceForm" [fields]="asistanceFields" [model]="asistanceModel"></formly-form>
+        </form> 
+        </td>
+    </tr>
+    </tbody>
+</table>

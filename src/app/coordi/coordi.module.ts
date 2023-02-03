@@ -1,14 +1,16 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {CoordiComponent} from './coordi.component';
-import {HomeComponent} from './home/home.component';
-import {RouterModule, Routes} from "@angular/router";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CoordiComponent } from './coordi.component';
+import { HomeComponent } from './home/home.component';
+import { RouterModule, Routes } from "@angular/router";
 import { CoordiNavComponent } from './coordi-nav/coordi-nav.component';
-import {FormlyModule} from "@ngx-formly/core";
-import {ReactiveFormsModule} from "@angular/forms";
-import {CustomFormsModule} from "../forms/custom-forms.module";
+import { FormlyModule } from "@ngx-formly/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { CustomFormsModule } from "../forms/custom-forms.module";
 import { SearchPeerComponent } from './search-peer/search-peer.component';
-import {ComponentsModule} from "../components/components.module";
+import { ComponentsModule } from "../components/components.module";
+import { AttendanceTableComponent } from './attendance-table/attendance-table.component';
+import { CPeerExplorerComponent } from './c-peer-explorer/c-peer-explorer.component';
 
 const routes: Routes = [
   {
@@ -22,7 +24,7 @@ const routes: Routes = [
     ]
   },
   // redirect to home if no path specified
-  {path: '', redirectTo: '', pathMatch: 'full'},
+  { path: '', redirectTo: '', pathMatch: 'full' },
 ]
 
 @NgModule({
@@ -30,16 +32,18 @@ const routes: Routes = [
     CoordiComponent,
     HomeComponent,
     CoordiNavComponent,
-    SearchPeerComponent
+    SearchPeerComponent,
+    AttendanceTableComponent,
+    CPeerExplorerComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        FormlyModule,
-        ReactiveFormsModule,
-        CustomFormsModule,
-        ComponentsModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FormlyModule,
+    ReactiveFormsModule,
+    CustomFormsModule,
+    ComponentsModule
+  ]
 })
 export class CoordiModule {
 }
