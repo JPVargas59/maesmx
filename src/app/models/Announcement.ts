@@ -6,7 +6,7 @@ export interface Announcement {
   subject: string;
   url: string;
   endDate: Timestamp;
-  registerForm: string;
+  roomLink: string;
   description?: string;
   startDate?: Date;
 }

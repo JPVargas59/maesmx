@@ -289,10 +289,12 @@ export class DatabaseService {
   // get announcements from schools collection where endDate is greater than current date
   getAnnouncements(): Observable<Announcement[]> {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    const today = new Date();
+
     return this.afs
       .collection(`schools/${emailDomain}/announcements`, (ref) =>
         ref
-          .where('endDate', '>', new Date())
+          .where('endDate', '>', today)
           .orderBy('endDate', 'asc')
       )
       .valueChanges({ idField: 'id' }) as Observable<Announcement[]>;
