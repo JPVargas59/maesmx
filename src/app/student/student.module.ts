@@ -11,6 +11,7 @@ import { CustomFormsModule } from '../forms/custom-forms.module';
 import { SchedulesComponent } from './schedules/schedules.component';
 import { StudentNavComponent } from './student-nav/student-nav.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'schedules', component: SchedulesComponent },
       { path: 'fill-profile', component: FillProfileComponent },
       { path: 'profile/:userId', component: ProfileComponent },
+      { path: 'announcement/:announcementId', component: AnnouncementComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
@@ -34,6 +36,7 @@ const routes: Routes = [
     SchedulesComponent,
     StudentNavComponent,
     ProfileComponent,
+    AnnouncementComponent,
   ],
   imports: [
     CommonModule,

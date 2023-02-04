@@ -81,14 +81,14 @@
   
   <hr class="my-2" />
 
-  <p *ngIf="selectedAnnouncement.endDate.toDate().getDate() === today.getDate(); else todayBlock">El día de la sesión podrás acceder en <a
+  <p *ngIf="selectedAnnouncement.endDate.toDate().getDate() === today.getDate(); else todayBlock">El día de la sesión podrás registrarte en <a
       (click)="registerAssistance(selectedAnnouncement.id)" class="text-indigo-600 underline"
-      href="{{selectedAnnouncement.roomLink}}" target="_blank" rel="noreferrer noopener">este enlace</a>.
+      href="/student/announcement/{{selectedAnnouncement.id}}" target="_blank" rel="noreferrer noopener">este enlace</a>.
   </p>
   <ng-template #todayBlock>
-    <p>El día de la sesión podrás acceder en <span class="text-gray-500">este enlace (inactivo)</span>.</p>
+    <p>El día de la sesión podrás registrarte en <span class="text-gray-500">este enlace (inactivo)</span>.</p>
   </ng-template>
-  <p class="font-thin text-sm">Para nosotros es importante contabilizar el número de personas que atienden a la sesión,
-    por lo tanto te pedimos acceder al enlace desde esta página, ya que de otro modo no se contabiliza la asesoría.</p>
+  <!-- <p class="font-thin text-sm">Para nosotros es importante contabilizar el número de personas que atienden a la sesión,
+    por lo tanto te pedimos acceder al enlace desde esta página, ya que de otro modo no se contabiliza la asesoría.</p> -->
 
 </app-modal>

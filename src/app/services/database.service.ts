@@ -286,6 +286,14 @@ export class DatabaseService {
       .valueChanges({ idField: 'id' }) as Observable<PeerInfo[]>;
   }
 
+  getAnnouncementById(announcementId: string): Observable<Announcement> {
+    const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    return this.afs
+      .doc<Announcement>(`schools/${emailDomain}/announcements/${announcementId}`)
+      .valueChanges() as Observable<Announcement>;
+
+  }
+
   // get announcements from schools collection where endDate is greater than current date
   getAnnouncements(): Observable<Announcement[]> {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];
