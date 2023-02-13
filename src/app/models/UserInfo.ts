@@ -14,6 +14,7 @@ export interface UserInfo {
   photoURL?: string;
   role: Role;
   career?: string;
+  area?: string;
   campus?: string;
   createdAt?: Timestamp;
   updatedAt?: Timestamp;

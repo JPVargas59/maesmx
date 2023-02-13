@@ -103,7 +103,13 @@ export class DatabaseService {
     return this.afs
       .collection(`schools/${emailDomain}/majors`)
       .valueChanges({ idField: 'id' }) as Observable<Major[]>;
+  }
 
+  getMajorById(id: string): Observable<Major> {
+    const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    return this.afs
+    .doc(`schools/${emailDomain}/majors/${id}`)
+    .valueChanges() as Observable<Major>;
   }
 
   getCampus(): Observable<Campus[]> {

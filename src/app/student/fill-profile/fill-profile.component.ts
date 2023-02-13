@@ -13,6 +13,8 @@ import { PeerInfo, Role, UserInfo, PeerStatus } from "../../models/UserInfo";
 })
 export class FillProfileComponent implements OnInit {
 
+  majorsMap = {}
+
   form = new FormGroup({});
   model: UserInfo = {
     role: Role.User,
@@ -131,15 +133,18 @@ export class FillProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.database.getUserInfo().subscribe(userInfo => {
-      console.log(userInfo);
       this.model = userInfo;
     })
 
     this.database.getMajors().subscribe(majors => {
-      this.fields[4].templateOptions!.options = majors.map(majors => {
+      this.fields[4].templateOptions!.options = majors.map(major => {
+        
+        // @ts-ignore
+        this.majorsMap[major.id] = major.school;
+
         return {
-          label: majors.name,
-          value: majors.id
+          label: major.name,
+          value: major.id
         }
       })
     })
@@ -157,10 +162,12 @@ export class FillProfileComponent implements OnInit {
   onSubmit(value: any) {
     delete value.email;
     value.name = value.firstname.trim() + ' ' + value.lastname.trim();
+    // @ts-ignore
+    value.area = this.majorsMap[value.career]
+
     // update userInfo
     console.log(value)
     this.database.updateUserInfo(localStorage.getItem('uid'), value).then(() => {
-      console.log('User info updated');
       alert('Información actualizada');
       this.router.navigate(['/student/home']);
     })
