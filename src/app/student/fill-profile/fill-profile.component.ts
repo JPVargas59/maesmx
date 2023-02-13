@@ -4,7 +4,7 @@ import { FormlyFieldConfig } from "@ngx-formly/core";
 import { Major } from 'src/app/models/Major';
 import { DatabaseService } from "../../services/database.service";
 import { Router } from "@angular/router";
-import { PeerInfo, Role, UserInfo } from "../../models/UserInfo";
+import { PeerInfo, Role, UserInfo, PeerStatus } from "../../models/UserInfo";
 
 @Component({
   selector: 'app-fill-profile',
@@ -71,7 +71,8 @@ export class FillProfileComponent implements OnInit {
         label: 'Campus',
         options: []
       }
-    }, {
+    }, 
+    {
       key: 'role',
       type: 'select',
       defaultValue: Role.User,
@@ -90,6 +91,33 @@ export class FillProfileComponent implements OnInit {
           {
             label: 'Coordinador',
             value: Role.Coordi
+          },
+        ]
+      }
+    },
+    {
+      key: 'status',
+      type: 'select',
+      defaultValue: PeerStatus.Student,
+      templateOptions: {
+        label: 'Tipo de participación',
+        placeholder: 'Selecciona tu tipo de participación',
+        options: [
+          {
+            label: 'Alumno',
+            value: PeerStatus.Student
+          },
+          {
+            label: 'Voluntario',
+            value: PeerStatus.Volunteer
+          },
+          {
+            label: 'Voluntario cantidato a graduarse',
+            value: PeerStatus.GradutateCandidateVolunteer
+          },
+          {
+            label: 'Becario',
+            value: PeerStatus.Scholarship
           },
         ]
       }

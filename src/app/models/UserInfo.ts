@@ -8,6 +8,7 @@ export interface UserInfo {
   uid: string;
   email: string;
   name?: string;
+  status?: string;
   lastname?: string;
   firstname?: string;
   photoURL?: string;
@@ -37,4 +38,11 @@ export enum Role {
   Coordi = 'coordi',
   Peer = 'mae',
   Admin = 'admin'
+}
+
+export enum PeerStatus {
+  GradutateCandidateVolunteer = 'voluntario candidato a graduarse',
+  Volunteer = 'voluntario',
+  Scholarship = 'becario',
+  Student = 'estudiante'
 }
