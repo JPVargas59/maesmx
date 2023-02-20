@@ -63,7 +63,8 @@ export class FillProfileComponent implements OnInit {
       type: 'select',
       templateOptions: {
         label: 'Carrera',
-        options: []
+        options: [],
+        required: true,
       }
     },
     {
@@ -71,7 +72,8 @@ export class FillProfileComponent implements OnInit {
       type: 'select',
       templateOptions: {
         label: 'Campus',
-        options: []
+        options: [],
+        required: true,
       }
     }, 
     {
@@ -94,7 +96,8 @@ export class FillProfileComponent implements OnInit {
             label: 'Coordinador',
             value: Role.Coordi
           },
-        ]
+        ],
+        required: true,
       }
     },
     {
@@ -121,7 +124,8 @@ export class FillProfileComponent implements OnInit {
             label: 'Becario',
             value: PeerStatus.Scholarship
           },
-        ]
+        ],
+        required: true,
       }
     }
   ]
