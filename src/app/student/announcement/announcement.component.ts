@@ -18,7 +18,7 @@ export class AnnouncementComponent implements OnInit {
     subject: '',
     roomLink: '',
     endDate: new Timestamp(0, 0),
-    url: '',
+    startDate: new Timestamp(0, 0),
   };
   announcementExists: boolean = true;
 

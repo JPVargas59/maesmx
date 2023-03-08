@@ -4,9 +4,9 @@ export interface Announcement {
   id: string;
   title: string;
   subject: string;
-  url: string;
   endDate: Timestamp;
+  startDate: Timestamp;
   roomLink: string;
+  url?: string;
   description?: string;
-  startDate?: Date;
 }
