@@ -35,10 +35,11 @@ export type WeekSchedule = {
 } & { };
 
 export enum Role {
-  User = 'user',
+  Admin = 'admin',
   Coordi = 'coordi',
+  SubjectCoordi = 'subjectCoordi',
+  User = 'user',
   Peer = 'mae',
-  Admin = 'admin'
 }
 
 export enum PeerStatus {

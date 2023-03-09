@@ -21,7 +21,7 @@ const routes: Routes = [
     path: 'maes',
     loadChildren: () => import('./peer/peer.module').then(m => m.PeerModule), ...canActivate(redirectUnauthorizedToLogin),
     canLoad: [RoleGuard],
-    data: {roles: [Role.Peer, Role.Coordi, Role.Admin]}
+    data: {roles: [Role.Peer, Role.Coordi, Role.Admin, Role.SubjectCoordi]}
   },
   // student
   {
@@ -42,6 +42,14 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
     canLoad: [RoleGuard],
     data: {roles: [Role.Coordi, Role.Admin]}
+  },
+  // Coordi de materia
+  {
+    path: 'subjectCoordi',
+    loadChildren: () => import('./subject-coordi/subject-coordi.module').then(m => m.SubjectCoordiModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+    canLoad: [RoleGuard],
+    data: {roles: [Role.Coordi, Role.SubjectCoordi]}
   },
   // Home
   {path: '', component: LandingComponent},

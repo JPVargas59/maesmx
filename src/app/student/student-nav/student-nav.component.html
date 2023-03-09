@@ -7,7 +7,7 @@
       Horarios
     </a>
     <div class="mx-auto"></div>
-    <a *ngIf="['admin', 'mae', 'coordi'].includes(user.role)" routerLink="/maes" class="hover:text-blue-800 transition-all py-2 px-4 text-md text-gray-800 font-bold">
+    <a *ngIf="['admin', 'mae', 'subjectCoordi', 'coordi'].includes(user.role)" routerLink="/maes" class="hover:text-blue-800 transition-all py-2 px-4 text-md text-gray-800 font-bold">
       MAE
     </a>
     <a *ngIf="['coordi', 'admin'].includes(user.role)" routerLink="/coordi" class="hover:text-blue-800 transition-all py-2 px-4 text-md text-gray-800 font-bold">
@@ -15,6 +15,9 @@
     </a>
     <a *ngIf="['admin'].includes(user.role)" routerLink="/admin" class="hover:text-blue-800 transition-all py-2 px-4 text-md text-gray-800 font-bold">
       Admin
+    </a>
+    <a *ngIf="['subjectCoordi', 'coordi', 'admin'].includes(user.role)" routerLink="/subjectCoordi" class="hover:text-blue-800 transition-all py-2 px-4 text-md text-gray-800 font-bold">
+      Coordi de Materia
     </a>
     <a (click)="userService.signOut()" routerLink="/" class="hover:text-gray-800 transition-all py-2 px-4 text-md text-red-900 font-bold">
       Cerrar sesión
