@@ -305,6 +305,11 @@ export class DatabaseService {
       }); 
     }
 
+  deleteAnnouncement(id: string){
+    const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    this.afs.doc(`schools/${emailDomain}/announcements/${id}`).delete()
+  }
+
   getAnnouncementById(announcementId: string): Observable<Announcement> {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];
     return this.afs
