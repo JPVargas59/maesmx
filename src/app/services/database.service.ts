@@ -356,6 +356,12 @@ export class DatabaseService {
     }, {merge: true}); 
   }
 
+  getAnnouncementAssistance(id: string){
+    const emailDomain = localStorage.getItem('email')!.split('@')[1];
+    return this.afs.collection(`schools/${emailDomain}/announcements/${id}/attendants`)
+      .valueChanges() as Observable<PeerInfo[]>;
+  }
+
   // get settings from schools collection
   getSettings(): Observable<Settings> {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../../services/database.service';
 import { Observable } from 'rxjs';
 import { Announcement } from '../../models/Announcement';
+const Papa = require('papaparse');
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,34 @@ export class HomeComponent implements OnInit {
   openAnnouncementForm: boolean = false;
 
   deleteAnnouncement(id: string){
-    this.databaseService.deleteAnnouncement(id);
+    if (confirm('¿Estás seguro de que quieres borrar este anuncio? (Se perderá el registro de asistencia)')) {
+      this.databaseService.deleteAnnouncement(id);
+    }
+  }
+
+  downloadAnnouncementAssistance(id: string){
+    this.databaseService.getAnnouncementAssistance(id).subscribe(assistants => {
+      console.log(assistants)
+      const csv = Papa.unparse([
+        {
+          "uid": "",
+          "email": "",
+          "name": "",
+          "career": "",
+          "area": "",
+          "campus": "",
+          "comment": "",
+        },
+        ...assistants
+      ]);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${id}.csv`;
+      a.click();
+    })
   }
 
 }
