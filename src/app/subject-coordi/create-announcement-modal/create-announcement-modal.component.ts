@@ -46,10 +46,9 @@ export class CreateAnnouncementModalComponent implements OnInit {
     {
       key: 'hour',
       type: 'input',
-      defaultValue: (new Date().getHours()).toString(),
       templateOptions: {
         label: 'Hora (24 hrs)',
-        placeholder: 'Ej. 14 = 2 PM',
+        placeholder: (new Date().getHours()).toString(),
         type: 'number',
         min: 0,
         max: 23,
@@ -60,10 +59,9 @@ export class CreateAnnouncementModalComponent implements OnInit {
     {
       key: 'minute',
       type: 'input',
-      defaultValue: (new Date().getMinutes()).toString(),
       templateOptions: {
         label: 'Minuto',
-        placeholder: 'Minuto de la sesión',
+        placeholder: (new Date().getMinutes()).toString(),
         type: 'number',
         min: 0,
         max: 59,
@@ -74,10 +72,9 @@ export class CreateAnnouncementModalComponent implements OnInit {
     {
       key: 'day',
       type: 'input',
-      defaultValue: (new Date().getDate()).toString(),
       templateOptions: {
         label: 'Día',
-        placeholder: 'Día de la sesión',
+        placeholder: (new Date().getDate()).toString(),
         type: 'number',
         min: 0,
         max: 31,
@@ -88,10 +85,9 @@ export class CreateAnnouncementModalComponent implements OnInit {
     {
       key: 'month',
       type: 'input',
-      defaultValue: (new Date().getMonth() + 1).toString(),
       templateOptions: {
         label: 'Mes',
-        placeholder: 'Mes de la sesión',
+        placeholder: (new Date().getMonth() + 1).toString(),
         type: 'number',
         min: 1,
         max: 12,
@@ -102,10 +98,9 @@ export class CreateAnnouncementModalComponent implements OnInit {
     {
       key: 'year',
       type: 'input',
-      defaultValue: (new Date().getFullYear()).toString(),
       templateOptions: {
         label: 'Año',
-        placeholder: 'Minuto de la sesión',
+        placeholder: (new Date().getFullYear()).toString(),
         type: 'number',
         min: 2020,
         max: new Date().getFullYear() + 1,

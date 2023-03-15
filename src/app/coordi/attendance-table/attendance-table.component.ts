@@ -14,6 +14,9 @@ import { WeekDays, WeekDaysTranslate } from '../../models/Settings';
   styleUrls: ['./attendance-table.component.scss']
 })
 export class AttendanceTableComponent implements OnInit {
+
+  openReportModal: boolean = false;
+
   today = new Date();
   weekDaysArray = [WeekDays.Sunday, WeekDays.Monday, WeekDays.Tuesday, WeekDays.Wednesday, WeekDays.Thursday, WeekDays.Friday, WeekDays.Saturday]
 

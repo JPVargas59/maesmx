@@ -11,6 +11,7 @@ import { SearchPeerComponent } from './search-peer/search-peer.component';
 import { ComponentsModule } from "../components/components.module";
 import { AttendanceTableComponent } from './attendance-table/attendance-table.component';
 import { CPeerExplorerComponent } from './c-peer-explorer/c-peer-explorer.component';
+import { ReportModalComponent } from './report-modal/report-modal.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     CoordiNavComponent,
     SearchPeerComponent,
     AttendanceTableComponent,
-    CPeerExplorerComponent
+    CPeerExplorerComponent,
+    ReportModalComponent
   ],
   imports: [
     CommonModule,

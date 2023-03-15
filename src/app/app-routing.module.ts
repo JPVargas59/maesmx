@@ -49,7 +49,7 @@ const routes: Routes = [
     loadChildren: () => import('./subject-coordi/subject-coordi.module').then(m => m.SubjectCoordiModule),
     ...canActivate(redirectUnauthorizedToLogin),
     canLoad: [RoleGuard],
-    data: {roles: [Role.Coordi, Role.SubjectCoordi]}
+    data: {roles: [Role.Coordi, Role.SubjectCoordi, Role.Admin]}
   },
   // Home
   {path: '', component: LandingComponent},

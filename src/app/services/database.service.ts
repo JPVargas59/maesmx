@@ -424,6 +424,14 @@ export class DatabaseService {
       .valueChanges() as Observable<any[]>;
   }
 
+  getAttendanceReport(year: string, month: string, day: string){
+    const dateString = (new Date(Number(year), Number(month) - 1, Number(day))).toISOString().split('T')[0]
+    console.log(dateString)
+    return this.afs
+      .collection(`attendance/${dateString}/report`)
+      .valueChanges() as Observable<any[]>;
+  }
+
   getUser(uid: string): Observable<PeerInfo> {
     return this.afs
       .doc<any>(`users/${uid}`)
