@@ -9,6 +9,7 @@ import {FormGroup} from "@angular/forms";
 export class SubmitButtonComponent implements OnInit {
 
   @Input() label: string = 'Submit';
+  @Input() disabled: boolean = false;
 
   constructor() { }
 

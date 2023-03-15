@@ -1,0 +1,22 @@
+<app-modal
+  title="Agregar nuevo anuncio"
+  body=""
+  [canClose]="true"
+  closeBtnText="Cancelar registro"
+  (onClose)="open = false"
+  [open]="open"
+  >
+  <form [formGroup]="form" (ngSubmit)="onSubmit(model)" class="py-2">
+    <formly-form
+      class="pr-6 grid grid-cols-6 gap-4"
+      [form]="form"
+      [fields]="fields"
+      [model]="model"
+    ></formly-form>
+    <app-submit-button 
+      label="Crear anuncio"
+      [disabled]="!(model.title !== '' && model.subject !== '' && model.year && model.month && model.day && model.minute && model.hour && !loading)"
+      >
+    </app-submit-button>
+  </form>
+</app-modal>

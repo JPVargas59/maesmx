@@ -8,6 +8,8 @@ import { FormlyModule } from '@ngx-formly/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from '../forms/custom-forms.module';
 import { ComponentsModule } from '../components/components.module';
+import { CreateAnnouncementModalComponent } from './create-announcement-modal/create-announcement-modal.component';
+// import { ModalComponent } from '../components/modal/modal.component';
 
 const routes: Routes = [
   {
@@ -28,7 +30,8 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     SubjectCoordiComponent,
-    SubjectCoordiNavComponent
+    SubjectCoordiNavComponent,
+    CreateAnnouncementModalComponent
   ],
   imports: [
     CommonModule,

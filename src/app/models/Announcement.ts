@@ -6,7 +6,9 @@ export interface Announcement {
   subject: string;
   endDate: Timestamp;
   startDate: Timestamp;
-  roomLink: string;
+  place?: string;
+  roomLink?: string;
   url?: string;
   description?: string;
+  author?: any;
 }

@@ -12,4 +12,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openAnnouncementForm: boolean = false;
+
+  deleteAnnouncement(id: string){
+    console.log(id)
+  }
+
 }

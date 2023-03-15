@@ -292,6 +292,19 @@ export class DatabaseService {
       .valueChanges({ idField: 'id' }) as Observable<PeerInfo[]>;
   }
 
+  createAnnouncement(announcement: Announcement){
+      const emailDomain = localStorage.getItem('email')!.split('@')[1];
+  
+      this.afs.doc(`schools/${emailDomain}/announcements/${announcement.id}`)
+      .set(announcement)
+      .then(() => {
+        alert('El anuncio se creó con exito')
+      }) 
+      .catch(() => {
+        alert('ERROR: El anuncio no pudo ser creado')
+      }); 
+    }
+
   getAnnouncementById(announcementId: string): Observable<Announcement> {
     const emailDomain = localStorage.getItem('email')!.split('@')[1];
     return this.afs

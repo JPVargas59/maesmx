@@ -2,3 +2,50 @@
 <p class="text-md text-gray-600">
   Aqui podrás organizar y preparar Asesorías Intensivas, CRAM Sessions y demás asesorías grupales 
 </p>
+
+<hr class="my-2">
+
+<div class="flex justify-between mb-2">
+  <div class="flex">
+    <h2 class="text-2xl font-bold">Anuncios</h2>
+  </div>
+  <div class="order-last self-center">
+    <button
+    (click)="openAnnouncementForm = true"
+      class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+      <!-- (click)="registerRequestForm = !registerRequestForm" -->
+      Agregar nuevo anuncio
+    </button>
+  </div>
+</div>
+
+<table class="table-auto w-full text-left bg-white rounded-md shadow-sm">
+  <thead class="border-b border-gray-300">
+  <tr>
+      <th class="px-4 py-2">Titulo</th>
+      <th class="px-4 py-2">Tema/Materia</th>
+      <th class="px-4 py-2">Fecha</th>
+      <th class="px-4 py-2">Hora Inicio</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr class="border-b hover:bg-gray-100">
+      <td class="px-4 py-2"> MAEs Cram Session: Dirección financiera </td>
+      <td class="px-4 py-2"> Decisión Financiera </td>
+      <td class="px-4 py-2"> 09/03/2023 </td>
+      <td class="px-4 py-2"> 14:00 </td>
+      <td class="px-4 py-2"> 
+        <button 
+          class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          (click)="deleteAnnouncement('a')"
+          >
+          Eliminar
+        </button> 
+      </td>
+  </tr>
+  </tbody>
+</table>
+
+<app-create-announcement-modal [open]="openAnnouncementForm"> </app-create-announcement-modal>
