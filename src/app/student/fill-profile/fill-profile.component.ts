@@ -96,6 +96,10 @@ export class FillProfileComponent implements OnInit {
             label: 'Coordinador',
             value: Role.Coordi
           },
+          {
+            label: 'Académico TEC',
+            value: Role.Academic
+          },
         ],
         required: true,
       }

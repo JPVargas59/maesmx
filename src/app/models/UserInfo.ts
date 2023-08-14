@@ -38,6 +38,7 @@ export enum Role {
   Admin = 'admin',
   Coordi = 'coordi',
   SubjectCoordi = 'subjectCoordi',
+  Academic = 'Academic',
   User = 'user',
   Peer = 'mae',
 }
