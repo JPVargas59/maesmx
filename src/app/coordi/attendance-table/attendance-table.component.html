@@ -18,6 +18,7 @@
     <tr>
         <th class="px-4 py-2">Matricula</th>
         <th class="px-4 py-2">Nombre</th>
+        <th class="px-4 py-2">Carrera</th>
         <th class="px-4 py-2">Horario</th>
         <th class="px-4 py-2">Asistió</th>
     </tr>
@@ -28,6 +29,7 @@
         [ngClass]="checkAttendance(peer)"><!-- TODO: Esta linea se llama una vez por cada operación, y la función es O(n) se debería de poder mejorar de algún modo -->
         <td class="px-4 py-2"> {{peer.uid.toUpperCase()}} </td>
         <td class="px-4 py-2"> {{peer.name}} </td>
+        <td class="px-4 py-2"> {{peer.career}} </td>
         <td class="px-4 py-2">
         <p class="text-white bg-green-600 rounded px-2 py-2 min-w-max">
             {{ getStartHour(getTodaySchedule(peer) ?? []) }} - {{ getFinishHour(getTodaySchedule(peer) ?? []) }}
